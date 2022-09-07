@@ -12,9 +12,20 @@ export default async function seachWord(
 ) {
   try {
     await connectMongo();
-    const {body} = req;
+    const { body } = req;
     const q = body;
-    const words = await Word.find({}).exec();
+    let params = {};
+    if (q)
+      params = {
+        $or: [
+          { text_en: { $regex: q, $options: "i" } },
+          { text_es: { $regex: q, $options: "i" } },
+        ],
+      };
+    const words = await Word.find(params)
+      .limit(10)
+      .sort({ text_en: "asc" })
+      .exec();
     res.status(200).json(words);
   } catch (err) {
     res.status(400).json({ error: "Internal server error" });

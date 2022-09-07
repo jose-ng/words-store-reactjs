@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CreateWord from "./CreateWord";
 import styles from "./Header.module.scss";
 
-function Header() {
+function Header({ onSearch }: any) {
   const [showCreate, setShowCreate] = useState(false);
   const handlerAddWord = () => {
     setShowCreate(!showCreate);
@@ -15,7 +15,9 @@ function Header() {
           <button type="button" onClick={handlerAddWord}>
             {`${!showCreate ? "Add Word" : "Cancel"}`}
           </button>
-          {showCreate && <CreateWord />}
+          {showCreate && (
+            <CreateWord setShowCreate={setShowCreate} onSearch={onSearch} />
+          )}
         </nav>
       </header>
     </>

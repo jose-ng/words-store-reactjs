@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-function Search() {
+function Search({ onSearch }: any) {
   const [searchForm, setSearchForm] = useState({ search: "" });
+
   const handlerSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -10,10 +11,10 @@ function Search() {
       ...searchForm,
       [name]: value,
     });
-  };
-  const handlerSearchBtnEnter = () =>{
 
-  }
+    onSearch(value);
+  };
+
   return (
     <section>
       <div>
@@ -23,7 +24,6 @@ function Search() {
           value={searchForm.search}
           onChange={handlerSearch}
         ></input>
-        <button type="button" onClick={handlerSearchBtnEnter}>Search</button>
       </div>
     </section>
   );
