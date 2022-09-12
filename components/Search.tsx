@@ -17,14 +17,12 @@ function Search({ onSearch }: any) {
 
   return (
     <section>
-      <div>
-        <input
-          name="search"
-          placeholder="Search a word"
-          value={searchForm.search}
-          onChange={handlerSearch}
-        ></input>
-      </div>
+      <input
+        name="search"
+        placeholder="Search a word"
+        value={searchForm.search}
+        onChange={handlerSearch}
+      ></input>
     </section>
   );
 }

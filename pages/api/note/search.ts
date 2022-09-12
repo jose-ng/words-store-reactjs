@@ -1,12 +1,12 @@
 import connectMongo from "../../../utils/connectMongo";
-import Word from "../../../models/word";
+import Note from "../../../models/note";
 import { NextApiRequest, NextApiResponse } from "next";
 
 /**
  * @param {import('next').NextApiRequest} req
  * @param {import('next').NextApiResponse} res
  */
-export default async function searchWord(
+export default async function searchNote(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -18,15 +18,15 @@ export default async function searchWord(
     if (q)
       params = {
         $or: [
-          { text_en: { $regex: q, $options: "i" } },
-          { text_es: { $regex: q, $options: "i" } },
+          { title: { $regex: q, $options: "i" } },
+          { text: { $regex: q, $options: "i" } },
         ],
       };
-    const words = await Word.find(params)
+    const notes = await Note.find(params)
       .limit(10)
-      .sort({ text_en: "asc" })
+      .sort({ title: "asc" })
       .exec();
-    res.status(200).json(words);
+    res.status(200).json(notes);
   } catch (err) {
     res.status(400).json({ error: "Internal server error" });
   }

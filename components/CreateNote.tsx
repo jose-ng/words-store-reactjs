@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import URL_API from "../utils/env";
 
-function CreateWord({ onCancel, onSearch }: any) {
-  const [form, setForm] = useState({ text_es: "", text_en: "" });
+function CreateNote({ onCancel, onSearch }: any) {
+  const [form, setForm] = useState({ title: "", text: "" });
   const [sending, setSending] = useState(false);
 
   const handlerSendWord = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setSending(true);
-    if (!form.text_en || !form.text_es) return;
-    const res = await fetch(`${URL_API}/word/add`, {
+    if (!form.title || !form.text) return;
+    const res = await fetch(`${URL_API}/note/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,18 +17,18 @@ function CreateWord({ onCancel, onSearch }: any) {
       body: JSON.stringify(form),
     });
     setSending(false);
-    setForm({ text_es: "", text_en: "" });
+    setForm({ title: "", text: "" });
     onCancel();
     onSearch();
   };
 
-  const handlerSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlerSearch = (e: any) => {
     const name = e.target.name;
     const value = e.target.value;
 
     setForm({
       ...form,
-      [name]: value.trim(),
+      [name]: value,
     });
   };
 
@@ -36,17 +36,17 @@ function CreateWord({ onCancel, onSearch }: any) {
     <form>
       <input
         type="text"
-        name="text_en"
-        placeholder="Text en"
-        value={form.text_en}
+        name="title"
+        placeholder="Title"
+        value={form.title}
         onChange={handlerSearch}
       />
       <br />
-      <input
-        type="text"
-        name="text_es"
-        placeholder="Text es"
-        value={form.text_es}
+      <textarea
+        rows={4}
+        name="text"
+        placeholder="Text"
+        value={form.text}
         onChange={handlerSearch}
       />
       <br />
@@ -57,4 +57,4 @@ function CreateWord({ onCancel, onSearch }: any) {
   );
 }
 
-export default CreateWord;
+export default CreateNote;

@@ -7,34 +7,61 @@ import URL_API from "../utils/env";
 
 const Home: NextPage = () => {
   const [listWords, setListWords] = useState([]);
+  const [showNotes, setShowNotes] = useState(false);
 
   const getInfo = async (q = null) => {
     try {
-      let res: any = await fetch(`${URL_API}/word/search`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(q),
-      });
+      let res: any = {};
+      if (showNotes)
+        res = await fetch(`${URL_API}/note/search`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(q),
+        });
+      else
+        res = await fetch(`${URL_API}/word/search`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(q),
+        });
       res = await res.json();
+      
       setListWords(res);
     } catch (err) {}
   };
 
   useEffect(() => {
     getInfo();
-  }, []);
+  }, [showNotes]);
 
   const handlerSearch = (q = null) => {
     getInfo(q);
   };
 
+  const handlerCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.checked;
+    
+    setShowNotes(value);
+    
+  };
+
   return (
     <main>
       <Header onSearch={handlerSearch} />
+      <div>
+        Show notes{" "}
+        <input
+          type="checkbox"
+          checked={!!showNotes}
+          onChange={handlerCheckbox}
+        />
+      </div>
       <Search onSearch={handlerSearch} />
-      <Listwords listWords={listWords} />
+      <Listwords listWords={listWords} showNotes={showNotes} />
     </main>
   );
 };

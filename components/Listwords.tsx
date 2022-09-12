@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
-import URL_API from "../utils/env";
-
-function Listwords({ listWords = [] }) {
+function Listwords({ listWords = [], showNotes }: any) {
   return (
     <ul>
       {listWords.length > 0 &&
-        listWords.map(({ _id, text_es, text_en }: any) => {
+        listWords.map(({ _id, text_es, text_en, title, text }: any) => {
           return (
             <li key={_id}>
-              {text_en} - {text_es} <button type="button">Delete</button>
+              {showNotes ? title : text_en} - {showNotes ? text : text_es}
             </li>
           );
         })}
