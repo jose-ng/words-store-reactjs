@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import styles from "./Search.module.scss";
+
 function Search({ onSearch }: any) {
   const [searchForm, setSearchForm] = useState({ search: "" });
 
@@ -16,13 +18,28 @@ function Search({ onSearch }: any) {
   };
 
   return (
-    <section>
-      <input
-        name="search"
-        placeholder="Search a word"
-        value={searchForm.search}
-        onChange={handlerSearch}
-      ></input>
+    <section className={styles.SearchContainer}>
+      <div>
+        <input
+          name="search"
+          placeholder="Search a word"
+          value={searchForm.search}
+          onChange={handlerSearch}
+        ></input>
+        {searchForm.search && (
+          <button
+            type="button"
+            onClick={() => {
+              setSearchForm({
+                ...searchForm,
+                search: "",
+              });
+            }}
+          >
+            x
+          </button>
+        )}
+      </div>
     </section>
   );
 }
