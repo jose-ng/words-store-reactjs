@@ -43,6 +43,7 @@ const Home: NextPage = () => {
   };
 
   useEffect(() => {
+    setListWords([])
     getInfo();
   }, [showNotes]);
 
