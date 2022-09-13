@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import styles from "./Search.module.scss";
 
 function Search({ onSearch }: any) {
@@ -34,6 +33,7 @@ function Search({ onSearch }: any) {
                 ...searchForm,
                 search: "",
               });
+              onSearch("");
             }}
           >
             x

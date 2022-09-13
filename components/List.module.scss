@@ -1,0 +1,12 @@
+.ListContainer {
+  ul {
+    padding: 1px;
+  }
+  .Item {
+    &_HideAllText {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   const getInfo = async (q = null) => {
     try {
       let res: any = {};
-      if (showNotes)
+      if (showNotes) {
         res = await fetch(`${URL_API}/note/search`, {
           method: "POST",
           headers: {
@@ -20,7 +20,15 @@ const Home: NextPage = () => {
           },
           body: JSON.stringify(q),
         });
-      else
+        res = await res.json();
+
+        res = res.map((item: any) => {
+          return {
+            ...item,
+            hideAllText: true,
+          };
+        });
+      } else {
         res = await fetch(`${URL_API}/word/search`, {
           method: "POST",
           headers: {
@@ -28,8 +36,8 @@ const Home: NextPage = () => {
           },
           body: JSON.stringify(q),
         });
-      res = await res.json();
-      
+        res = await res.json();
+      }
       setListWords(res);
     } catch (err) {}
   };
@@ -44,9 +52,7 @@ const Home: NextPage = () => {
 
   const handlerCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.checked;
-    
     setShowNotes(value);
-    
   };
 
   return (
@@ -61,7 +67,7 @@ const Home: NextPage = () => {
         />
       </div>
       <Search onSearch={handlerSearch} />
-      <Listwords listWords={listWords} showNotes={showNotes} />
+      <Listwords listWords={listWords} showNotes={showNotes} setListWords={setListWords} />
     </main>
   );
 };
