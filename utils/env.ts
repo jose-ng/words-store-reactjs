@@ -1,3 +1,8 @@
-//const URL_API = "https://words-t.vercel.app/api";
-const URL_API = "http://localhost:3000/api";
+
+const isClient = typeof window !== 'undefined';
+console.log(isClient && window.location.host)
+const URL_API = isClient && window.location.host.includes("http://localhost:3000")
+  ? "http://localhost:3000/api"
+  : "https://words-t.vercel.app/api";
+
 export default URL_API;
