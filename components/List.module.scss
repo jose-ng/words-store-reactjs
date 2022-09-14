@@ -3,9 +3,10 @@
     padding: 1px;
   }
   .Item {
+    overflow: hidden;
     &_HideAllText {
       white-space: nowrap;
-      overflow: hidden;
+      
       text-overflow: ellipsis;
     }
   }
