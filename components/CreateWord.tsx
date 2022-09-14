@@ -8,18 +8,22 @@ function CreateWord({ onCancel, onSearch }: any) {
   const handlerSendWord = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setSending(true);
-    if (!form.text_en || !form.text_es) return;
-    const res = await fetch(`${URL_API}/word/add`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
-    setSending(false);
-    setForm({ text_es: "", text_en: "" });
-    onCancel();
-    onSearch();
+    try {
+      if (!form.text_en || !form.text_es) return;
+      const res = await fetch(`${URL_API}/word/add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+      setSending(false);
+      setForm({ text_es: "", text_en: "" });
+      onCancel();
+      onSearch();
+    } catch (err) {
+      setSending(false);
+    }
   };
 
   const handlerSearch = (e: React.ChangeEvent<HTMLInputElement>) => {

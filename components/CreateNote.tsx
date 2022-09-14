@@ -8,18 +8,22 @@ function CreateNote({ onCancel, onSearch }: any) {
   const handlerSendWord = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setSending(true);
-    if (!form.title || !form.text) return;
-    const res = await fetch(`${URL_API}/note/add`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
-    setSending(false);
-    setForm({ title: "", text: "" });
-    onCancel();
-    onSearch();
+    try {
+      if (!form.title || !form.text) return;
+      const res = await fetch(`${URL_API}/note/add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+      setSending(false);
+      setForm({ title: "", text: "" });
+      onCancel();
+      onSearch();
+    } catch (err) {
+      setSending(false);
+    }
   };
 
   const handlerSearch = (e: any) => {
