@@ -23,7 +23,7 @@ export default async function searchWord(
         ],
       };
     const words = await Word.find(params)
-      .limit(10)
+      .limit(100)
       .sort({ text_en: "asc" })
       .exec();
     res.status(200).json(words);
