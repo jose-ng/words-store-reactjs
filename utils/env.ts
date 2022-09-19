@@ -5,5 +5,8 @@ const URL_API = isClient
     ? "http://localhost:3000/api"
     : "https://words-t.vercel.app/api"
   : "";
-console.log(URL_API);
+
 export default URL_API;
+
+var ENV = process.env.NODE_ENV || "development";
+export { ENV };

@@ -1,13 +1,16 @@
 import React, { CSSProperties, useState } from "react";
 import URL_API from "../utils/env";
+import styles from "./Create.module.scss";
 
 function CreateWord({ onCancel, onSearch, ip }: any) {
   const [form, setForm] = useState({ text_es: "", text_en: "", ip: ip });
   const [sending, setSending] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handlerSendWord = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setSending(true);
+    setErrorMsg("");
     try {
       if (!form.text_en || !form.text_es) return;
       const res = await fetch(`${URL_API}/word/add`, {
@@ -17,12 +20,19 @@ function CreateWord({ onCancel, onSearch, ip }: any) {
         },
         body: JSON.stringify(form),
       });
-      setSending(false);
-      setForm({ text_es: "", text_en: "", ip: ip });
-      onCancel();
-      onSearch();
+      
+      if (res.status === 200) {
+        setSending(false);
+        setForm({ text_es: "", text_en: "", ip: ip });
+        onCancel();
+        onSearch();
+      } else {
+        setSending(false);
+        if (res.status === 403) setErrorMsg("Action not allowed");
+      }
     } catch (err) {
-      setSending(false);
+      setSending(false);      
+      setErrorMsg("Server error");
     }
   };
 
@@ -41,7 +51,7 @@ function CreateWord({ onCancel, onSearch, ip }: any) {
   };
 
   return (
-    <form>
+    <form className={styles.Container}>
       <input
         type="text"
         name="text_en"
@@ -57,6 +67,12 @@ function CreateWord({ onCancel, onSearch, ip }: any) {
         value={form.text_es}
         onChange={handlerSearch}
       />
+      {errorMsg && (
+        <>
+          <br />
+          <div className={styles['Error']}>{errorMsg}</div>
+        </>
+      )}
       <br />
       <button
         type="submit"

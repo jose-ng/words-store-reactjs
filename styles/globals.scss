@@ -15,10 +15,14 @@ a {
   box-sizing: border-box;
 }
 
-main{
+main {
   max-width: 1024px;
   margin: 0 auto;
-  height: 100vh;
+  padding-bottom: 150px;
+}
+
+h4 {
+  margin-top: 0;
 }
 
 @media (prefers-color-scheme: dark) {

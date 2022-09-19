@@ -11,6 +11,7 @@ export default async function searchWord(
   res: NextApiResponse
 ) {
   try {
+    
     await connectMongo();
     const { body } = req;
     const q = body;
