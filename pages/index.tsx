@@ -13,9 +13,9 @@ const Home: NextPage = () => {
   useEffect(() => {
     const getIp = async () => {
       try {
-        const res = await fetch("http://www.geoplugin.net/json.gp");
+        const res = await fetch("https://ipgeolocation.abstractapi.com/v1/?api_key=fdbbbaefc0114c39afb9109fbf3024cc");
         const ipObj = await res.json();
-        setIp(ipObj.geoplugin_request);
+        setIp(ipObj.ip_address);
       } catch {
         console.log("error IP");
       }
