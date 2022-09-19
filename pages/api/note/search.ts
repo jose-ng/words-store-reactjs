@@ -23,7 +23,7 @@ export default async function searchNote(
         ],
       };
     const notes = await Note.find(params)
-      .limit(10)
+      .limit(100)
       .sort({ title: "asc" })
       .exec();
     res.status(200).json(notes);
