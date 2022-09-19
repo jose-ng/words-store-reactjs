@@ -21,7 +21,7 @@ function CreateWord({ onCancel, onSearch, ip }: any) {
         body: JSON.stringify(form),
       });
       
-      if (res.status === 200) {
+      if (res.ok) {
         setSending(false);
         setForm({ text_es: "", text_en: "", ip: ip });
         onCancel();

@@ -1,6 +1,7 @@
 import connectMongo from "../../../utils/connectMongo";
 import Note from "../../../models/note";
 import { NextApiRequest, NextApiResponse } from "next";
+import { allowCreate } from "../../../utils/misc";
 
 /**
  * @param {import('next').NextApiRequest} req
@@ -11,7 +12,7 @@ export default async function addNote(
   res: NextApiResponse
 ) {
   try {
-    if (req.body.ip != process.env.IP) {
+    if (!allowCreate(req.body.ip)) {
       res.status(403).json({ error: "forbbiden" });
       return;
     }

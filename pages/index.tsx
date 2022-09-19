@@ -13,7 +13,9 @@ const Home: NextPage = () => {
   useEffect(() => {
     const getIp = async () => {
       try {
-        const res = await fetch("https://ipgeolocation.abstractapi.com/v1/?api_key=fdbbbaefc0114c39afb9109fbf3024cc");
+        const res = await fetch(
+          "https://ipgeolocation.abstractapi.com/v1/?api_key=fdbbbaefc0114c39afb9109fbf3024cc"
+        );
         const ipObj = await res.json();
         setIp(ipObj.ip_address);
       } catch {
@@ -100,16 +102,18 @@ const Home: NextPage = () => {
           setListWords={setListWords}
         />
       </main>
-      <div style={ipStyle}>
-        <span className="ip">{ip || ":/ "} </span>
-        {!ip && (
-          <input
-            name="ipBox"
-            placeholder="Set Code"
-            onChange={handlerInput}
-          ></input>
-        )}
-      </div>
+      {listWords.length > 0 && (
+        <div style={ipStyle}>
+          <span className="ip">{ip || ":/ "} </span>
+          {!ip && (
+            <input
+              name="ipBox"
+              placeholder="Set Code"
+              onChange={handlerInput}
+            ></input>
+          )}
+        </div>
+      )}
     </>
   );
 };

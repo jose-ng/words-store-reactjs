@@ -8,5 +8,5 @@ const URL_API = isClient
 
 export default URL_API;
 
-var ENV = process.env.NODE_ENV || "development";
-export { ENV };
+var isEnvDev = process.env.NODE_ENV === "development";
+export { isEnvDev };

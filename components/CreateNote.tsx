@@ -20,7 +20,7 @@ function CreateNote({ onCancel, onSearch, ip }: any) {
         },
         body: JSON.stringify(form),
       });
-      if (res.status === 200) {
+      if (res.ok) {
         setSending(false);
         setForm({ title: "", text: "", ip: ip });
         onCancel();
@@ -57,7 +57,7 @@ function CreateNote({ onCancel, onSearch, ip }: any) {
         placeholder="Title"
         value={form.title}
         onChange={handlerSearch}
-      />      
+      />
       <br />
       <textarea
         rows={4}
