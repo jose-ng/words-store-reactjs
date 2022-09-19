@@ -11,6 +11,7 @@ export default async function addWord(
   res: NextApiResponse
 ) {
   try {
+    console.log(req.body.ip, process.env.IP)
     if (req.body.ip != process.env.IP) {
       res.status(403).json({ error: "forbbiden" });
       return;
