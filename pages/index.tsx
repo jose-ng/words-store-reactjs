@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import Header from "../components/Header";
 import Listwords from "../components/Listwords";
 import Search from "../components/Search";
@@ -8,14 +8,17 @@ import URL_API from "../utils/env";
 const Home: NextPage = () => {
   const [listWords, setListWords] = useState([]);
   const [showNotes, setShowNotes] = useState(false);
-  const [ip, setIp] = useState('');
-  
+  const [ip, setIp] = useState("");
+
   useEffect(() => {
     const getIp = async () => {
-      const res = await fetch("http://www.geoplugin.net/json.gp");
-      const ipObj = await res.json();
-      console.log(ipObj.geoplugin_request)
-      setIp(ipObj.geoplugin_request);
+      try {
+        const res = await fetch("http://www.geoplugin.net/json.gp");
+        const ipObj = await res.json();
+        setIp(ipObj.geoplugin_request);
+      } catch {
+        console.log("error IP");
+      }
     };
     getIp();
   }, []);
@@ -62,9 +65,20 @@ const Home: NextPage = () => {
     getInfo(q);
   };
 
-  const handlerCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.checked;
-    setShowNotes(value);
+  const handlerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    if (name === "ipBox") {
+      const value = e.target.value;
+      setIp(value);
+    } else {
+      const value = e.target.checked;
+      setShowNotes(value);
+    }
+  };
+
+  const ipStyle: CSSProperties = {
+    maxWidth: "1024px",
+    margin: "0 auto",
   };
 
   return (
@@ -76,7 +90,7 @@ const Home: NextPage = () => {
           <input
             type="checkbox"
             checked={!!showNotes}
-            onChange={handlerCheckbox}
+            onChange={handlerInput}
           />
         </div>
         <Search onSearch={handlerSearch} />
@@ -86,7 +100,16 @@ const Home: NextPage = () => {
           setListWords={setListWords}
         />
       </main>
-      <span className="ip">{ip}</span>
+      <div style={ipStyle}>
+        <span className="ip">{ip || ":/ "} </span>
+        {!ip && (
+          <input
+            name="ipBox"
+            placeholder="Set Code"
+            onChange={handlerInput}
+          ></input>
+        )}
+      </div>
     </>
   );
 };
