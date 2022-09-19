@@ -3,7 +3,7 @@ import CreateNote from "./CreateNote";
 import CreateWord from "./CreateWord";
 import styles from "./Header.module.scss";
 
-function Header({ onSearch }: any) {
+function Header({ onSearch, ip }: any) {
   const [showCreateBtn, setShowCreateBtn] = useState(false);
   const [showNoteBtn, setShowNoteBtn] = useState(false);
   const handlerCancel = () => {
@@ -38,13 +38,21 @@ function Header({ onSearch }: any) {
           {showCreateBtn && (
             <>
               <h4>Add Word</h4>
-              <CreateWord onCancel={handlerCancel} onSearch={onSearch} />
+              <CreateWord
+                onCancel={handlerCancel}
+                onSearch={onSearch}
+                ip={ip}
+              />
             </>
           )}
           {showNoteBtn && (
             <>
               <h4>Add Note</h4>
-              <CreateNote onCancel={handlerCancel} onSearch={onSearch} />
+              <CreateNote
+                onCancel={handlerCancel}
+                onSearch={onSearch}
+                ip={ip}
+              />
             </>
           )}
           {(showCreateBtn || showNoteBtn) && (

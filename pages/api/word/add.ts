@@ -11,8 +11,16 @@ export default async function addWord(
   res: NextApiResponse
 ) {
   try {
+    if (req.body.ip != process.env.IP) {
+      res.status(403).json({ error: "forbbiden" });
+      return;
+    }
+
     await connectMongo();
-    const word = await Word.create(req.body);
+    const newWord = req.body;
+    delete newWord.ip;
+    const word = await Word.create(newWord);
+
     res.status(201).json({ word });
   } catch (err) {
     res.status(400).json({ error: "Internal server error" });

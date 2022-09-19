@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { CSSProperties, useState } from "react";
 import URL_API from "../utils/env";
 
-function CreateWord({ onCancel, onSearch }: any) {
-  const [form, setForm] = useState({ text_es: "", text_en: "" });
+function CreateWord({ onCancel, onSearch, ip }: any) {
+  const [form, setForm] = useState({ text_es: "", text_en: "", ip: ip });
   const [sending, setSending] = useState(false);
 
   const handlerSendWord = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -18,7 +18,7 @@ function CreateWord({ onCancel, onSearch }: any) {
         body: JSON.stringify(form),
       });
       setSending(false);
-      setForm({ text_es: "", text_en: "" });
+      setForm({ text_es: "", text_en: "", ip: ip });
       onCancel();
       onSearch();
     } catch (err) {
@@ -34,6 +34,10 @@ function CreateWord({ onCancel, onSearch }: any) {
       ...form,
       [name]: value.trim(),
     });
+  };
+
+  const buttonStyle: CSSProperties = {
+    margin: "10px 0",
   };
 
   return (
@@ -54,7 +58,12 @@ function CreateWord({ onCancel, onSearch }: any) {
         onChange={handlerSearch}
       />
       <br />
-      <button type="submit" disabled={sending} onClick={handlerSendWord}>
+      <button
+        type="submit"
+        disabled={sending}
+        onClick={handlerSendWord}
+        style={buttonStyle}
+      >
         Send
       </button>
     </form>

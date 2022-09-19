@@ -11,8 +11,16 @@ export default async function addNote(
   res: NextApiResponse
 ) {
   try {
+    if (req.body.ip != process.env.IP) {
+      res.status(403).json({ error: "forbbiden" });
+      return;
+    }
+
     await connectMongo();
-    const note = await Note.create(req.body);
+    const newNote = req.body;
+    delete newNote.ip;
+    const note = await Note.create(newNote);
+
     res.status(201).json({ note });
   } catch (err) {
     res.status(400).json({ error: "Internal server error" });

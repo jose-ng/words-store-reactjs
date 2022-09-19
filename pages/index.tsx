@@ -8,6 +8,17 @@ import URL_API from "../utils/env";
 const Home: NextPage = () => {
   const [listWords, setListWords] = useState([]);
   const [showNotes, setShowNotes] = useState(false);
+  const [ip, setIp] = useState('');
+  
+  useEffect(() => {
+    const getIp = async () => {
+      const res = await fetch("http://www.geoplugin.net/json.gp");
+      const ipObj = await res.json();
+      console.log(ipObj.geoplugin_request)
+      setIp(ipObj.geoplugin_request);
+    };
+    getIp();
+  }, []);
 
   const getInfo = async (q = null) => {
     try {
@@ -43,7 +54,7 @@ const Home: NextPage = () => {
   };
 
   useEffect(() => {
-    setListWords([])
+    setListWords([]);
     getInfo();
   }, [showNotes]);
 
@@ -57,19 +68,26 @@ const Home: NextPage = () => {
   };
 
   return (
-    <main>
-      <Header onSearch={handlerSearch} />
-      <div>
-        Show notes{" "}
-        <input
-          type="checkbox"
-          checked={!!showNotes}
-          onChange={handlerCheckbox}
+    <>
+      <main>
+        <Header onSearch={handlerSearch} ip={ip} />
+        <div>
+          Show notes{" "}
+          <input
+            type="checkbox"
+            checked={!!showNotes}
+            onChange={handlerCheckbox}
+          />
+        </div>
+        <Search onSearch={handlerSearch} />
+        <Listwords
+          listWords={listWords}
+          showNotes={showNotes}
+          setListWords={setListWords}
         />
-      </div>
-      <Search onSearch={handlerSearch} />
-      <Listwords listWords={listWords} showNotes={showNotes} setListWords={setListWords} />
-    </main>
+      </main>
+      <span className="ip">{ip}</span>
+    </>
   );
 };
 
