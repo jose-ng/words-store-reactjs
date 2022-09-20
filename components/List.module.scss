@@ -9,20 +9,21 @@
     &_HideAllText {
       white-space: nowrap;
       text-overflow: ellipsis;
+      padding-right: 15px;
     }
     pre {
       padding-left: 10px;
       border: 1px solid rgb(89, 89, 89);
       padding-bottom: 10px;
+      white-space: pre-wrap; /* css-3 */
     }
     .Eye {
       cursor: pointer;
-      position:absolute;
+      position: absolute;
       right: 0;
       img {
         filter: invert(1);
       }
     }
   }
-  
 }
