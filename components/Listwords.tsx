@@ -1,5 +1,8 @@
 import styles from "./List.module.scss";
 import classNames from "classnames";
+import eyeOpen from "../public/eye-open.svg";
+import eyeClose from "../public/eye-close.svg";
+import Image from "next/image";
 
 function Listwords({ listWords = [], showNotes, setListWords }: any) {
   const handlerList = (item: any, newValueForHideAllText: boolean) => {
@@ -29,8 +32,44 @@ function Listwords({ listWords = [], showNotes, setListWords }: any) {
                   handlerList(item, !item.hideAllText);
                 }}
               >
-                &bull; {showNotes ? item.title : item.text_en} -{" "}
-                {showNotes ? item.text : item.text_es}
+                {!showNotes ? (
+                  <>
+                    &bull; &nbsp;
+                    <span>
+                      {item.text_en}: {item.text_es}
+                    </span>
+                  </>
+                ) : item.hideAllText ? (
+                  <>
+                    &bull; &nbsp;
+                    <span>
+                      {item.title}: {item.text}
+                      <span className={styles["Eye"]}>
+                        <Image
+                          src={eyeOpen}
+                          alt={"alt"}
+                          width={16}
+                          height={16}
+                          layout="intrinsic"
+                        />
+                      </span>
+                    </span>
+                  </>
+                ) : (
+                  <div className={styles["Rendered-Text"]}>
+                    <span>&bull; {item.title}:</span>{" "}
+                    <span className={styles["Eye"]}>
+                      <Image
+                        src={eyeClose}
+                        alt={"alt"}
+                        width={16}
+                        height={16}
+                        layout="intrinsic"
+                      />
+                    </span>
+                    <pre>{" \n" + item.text}</pre>
+                  </div>
+                )}
               </li>
             );
           })}

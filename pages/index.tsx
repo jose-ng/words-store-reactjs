@@ -78,11 +78,6 @@ const Home: NextPage = () => {
     }
   };
 
-  const ipStyle: CSSProperties = {
-    maxWidth: "1024px",
-    margin: "0 auto",
-  };
-
   return (
     <>
       <main>
@@ -101,9 +96,8 @@ const Home: NextPage = () => {
           showNotes={showNotes}
           setListWords={setListWords}
         />
-      </main>
-      {listWords.length > 0 && (
-        <div style={ipStyle}>
+        {listWords.length > 0 && (
+        <footer>
           <span className="ip">{ip || ":/ "} </span>
           {!ip && (
             <input
@@ -112,8 +106,10 @@ const Home: NextPage = () => {
               onChange={handlerInput}
             ></input>
           )}
-        </div>
+        </footer>
       )}
+      </main>
+      
     </>
   );
 };
