@@ -67,7 +67,19 @@ function Listwords({ listWords = [], showNotes, setListWords }: any) {
                         layout="intrinsic"
                       />
                     </span>
-                    <pre>{" \n" + item.text}</pre>
+                    <pre>
+                      {" \n" + item.text}
+                      <br/>
+                      <br/>
+                      {item.urlImg && (                        
+                      <Image src={item.urlImg} 
+                      alt={"alt"}
+                      width={0}
+                      height={0}
+                      layout="responsive"/>
+                    )}
+                    </pre>
+                    
                   </div>
                 )}
               </li>
