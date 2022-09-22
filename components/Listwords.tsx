@@ -69,17 +69,18 @@ function Listwords({ listWords = [], showNotes, setListWords }: any) {
                     </span>
                     <pre>
                       {" \n" + item.text}
-                      <br/>
-                      <br/>
-                      {item.urlImg && (                        
-                      <Image src={item.urlImg} 
-                      alt={"alt"}
-                      width={0}
-                      height={0}
-                      layout="responsive"/>
-                    )}
+                      {item.urlImg && (
+                        <div>
+                          <Image
+                            src={item.urlImg}
+                            alt={"alt"}
+                            width={0}
+                            height={0}
+                            layout="responsive"
+                          />
+                        </div>
+                      )}
                     </pre>
-                    
                   </div>
                 )}
               </li>

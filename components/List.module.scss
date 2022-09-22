@@ -12,9 +12,26 @@
       padding-right: 15px;
     }
     pre {
-      padding: 0 10px 15px 10px ;
+      padding: 0 10px 15px 10px;
       border: 1px solid rgb(89, 89, 89);
-      white-space: pre-wrap; /* css-3 */
+      white-space: pre-wrap;
+      div {
+        padding-top: 10px;
+        max-width: 600px;
+        margin: 0 auto;
+        span {
+          span {
+            padding: 0 !important;
+          }
+        }
+        img {
+          position: relative !important;
+          width: 100% !important;
+          height: auto !important;
+          margin: 0 !important;
+          min-height: auto !important;
+        }
+      }
     }
     .Eye {
       cursor: pointer;
