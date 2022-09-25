@@ -42,7 +42,7 @@ function CreateWord({ onCancel, onSearch, ip }: any) {
 
     setForm({
       ...form,
-      [name]: value.trim(),
+      [name]: value,
     });
   };
 
