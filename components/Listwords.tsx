@@ -32,18 +32,12 @@ function Listwords({ listWords = [], showNotes, setListWords }: any) {
                   handlerList(item, !item.hideAllText);
                 }}
               >
-                {!showNotes ? (
+                {item.hideAllText ? (
                   <>
                     &bull; &nbsp;
                     <span>
-                      {item.text_en}: {item.text_es}
-                    </span>
-                  </>
-                ) : item.hideAllText ? (
-                  <>
-                    &bull; &nbsp;
-                    <span>
-                      {item.title}: {item.text}
+                      {showNotes ? item.title : item.text_en}:{" "}
+                      {showNotes ? item.text : item.text_es}
                       <span className={styles["Eye"]}>
                         <Image
                           src={eyeOpen}
@@ -57,7 +51,7 @@ function Listwords({ listWords = [], showNotes, setListWords }: any) {
                   </>
                 ) : (
                   <div className={styles["Rendered-Text"]}>
-                    <span>&bull; {item.title}:</span>{" "}
+                    <span>&bull; {showNotes ? item.title : item.text_en}:</span>{" "}
                     <span className={styles["Eye"]}>
                       <Image
                         src={eyeClose}
@@ -68,7 +62,7 @@ function Listwords({ listWords = [], showNotes, setListWords }: any) {
                       />
                     </span>
                     <pre>
-                      {" \n" + item.text}
+                      {" \n" + (showNotes ? item.text : item.text_es)}
                       {item.urlImg && (
                         <div>
                           <Image

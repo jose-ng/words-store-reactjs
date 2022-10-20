@@ -53,6 +53,13 @@ const Home: NextPage = () => {
           body: JSON.stringify(q),
         });
         res = await res.json();
+        
+        res = res.map((item: any) => {
+          return {
+            ...item,
+            hideAllText: true,
+          };
+        });
       }
       setListWords(res);
     } catch (err) {}
