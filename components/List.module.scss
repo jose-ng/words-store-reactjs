@@ -6,6 +6,14 @@
     overflow: hidden;
     list-style-type: none;
     position: relative;
+    padding-bottom: 1px;
+    &>button{
+      padding: 0;
+      cursor: pointer;
+    }
+    &>button:first-child{
+      margin-right: 1px;
+    }
     &_HideAllText {
       white-space: nowrap;
       text-overflow: ellipsis;

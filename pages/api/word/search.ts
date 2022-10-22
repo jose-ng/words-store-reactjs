@@ -25,7 +25,7 @@ export default async function searchWord(
       };
     const words = await Word.find(params)
       .limit(200)
-      .sort({ text_en: "asc" })
+      .sort({ rating: "desc" })
       .exec();
     res.status(200).json(words);
   } catch (err) {

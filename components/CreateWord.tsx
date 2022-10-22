@@ -34,7 +34,7 @@ function CreateWord({ onCancel, onSearch, ip }: any) {
       setSending(false);      
       setErrorMsg("Server error");
     }
-  };
+  }
 
   const handlerSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
