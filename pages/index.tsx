@@ -102,6 +102,7 @@ const Home: NextPage = () => {
           listWords={listWords}
           showNotes={showNotes}
           setListWords={setListWords}
+          ip={ip}
         />
         {listWords.length > 0 && (
         <footer>

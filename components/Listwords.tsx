@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import URL_API from "../utils/env";
 
-function Listwords({ listWords = [], showNotes, setListWords }: any) {
+function Listwords({ listWords = [], showNotes, setListWords, ip }: any) {
   const [sending, setSending] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const handlerUpdateRatingWord = async (data: any) => {
@@ -14,6 +14,7 @@ function Listwords({ listWords = [], showNotes, setListWords }: any) {
     try {
       if (sending) return;
       setSending(true);
+      data.ip = ip;
       const res = await fetch(`${URL_API}/word/updateRating`, {
         method: "POST",
         headers: {
