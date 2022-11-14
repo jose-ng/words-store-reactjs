@@ -20,6 +20,7 @@ function Search({ onSearch }: any) {
     <section className={styles.SearchContainer}>
       <div>
         <input
+          autoComplete="Off"
           name="search"
           placeholder="Search a word"
           value={searchForm.search}

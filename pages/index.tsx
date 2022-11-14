@@ -14,7 +14,8 @@ const Home: NextPage = () => {
   const [totalRecords, setTotalRecords] = useState(0);
   const [totalShowRecords, setTotalShowRecords] = useState(0);
   const [query, setQuery] = useState(null);
-  const [limitResult, setLimitResult] = useState(10);
+  const [limitResult, setLimitResult] = useState(20);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getIp = async () => {
@@ -33,6 +34,7 @@ const Home: NextPage = () => {
 
   const getInfo = async (q = null) => {
     try {
+      setLoading(true);
       let res: any = {};
       if (showNotes) {
         res = await fetch(`${URL_API}/note/search`, {
@@ -83,7 +85,10 @@ const Home: NextPage = () => {
       }
 
       setListWords(res);
-    } catch (err) {}
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -128,11 +133,27 @@ const Home: NextPage = () => {
           />
         </div>
         <Search showNotes={showNotes} onSearch={handlerSearch} />
-        {!showNotes && <span>{" Total show words: " + totalShowRecords}</span>}
         {!showNotes && (
           <span>
-            {` Total words ${query ? "with '" + query + "'" : ""}: ` +
-              totalRecords}
+            {" Total show words: " +
+              (totalShowRecords > totalRecords
+                ? totalRecords
+                : totalShowRecords)}
+          </span>
+        )}
+        {!showNotes && (
+          <span>
+            Total words
+            {query ? (
+              <>
+                {" with"}
+                <i>
+                  {" '"}
+                  {query} {"'"}
+                </i>
+              </>
+            ) : null}
+            {": " + totalRecords}
           </span>
         )}
         <Listwords
@@ -147,7 +168,7 @@ const Home: NextPage = () => {
               <>
                 <br />
                 <button
-                  disabled={listWords.length >= totalRecords}
+                  disabled={listWords.length >= totalRecords || loading}
                   type="button"
                   onClick={() => {
                     const skip = nextResults + 1;
