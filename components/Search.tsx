@@ -33,7 +33,7 @@ function Search({ onSearch }: any) {
                 ...searchForm,
                 search: "",
               });
-              onSearch("");
+              onSearch();
             }}
           >
             x

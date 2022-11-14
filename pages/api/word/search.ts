@@ -11,10 +11,9 @@ export default async function searchWord(
   res: NextApiResponse
 ) {
   try {
-    
     await connectMongo();
     const { body } = req;
-    const q = body;
+    const { q, skip, limit } = body;
     let params = {};
     if (q)
       params = {
@@ -24,10 +23,12 @@ export default async function searchWord(
         ],
       };
     const words = await Word.find(params)
-      .limit(200)
+      .skip(skip * 10)
+      .limit(limit)
       .sort({ rating: "desc" })
       .exec();
-    res.status(200).json(words);
+    const totalWords = await Word.count(params).exec();
+    res.status(200).json({ words, totalWords });
   } catch (err) {
     res.status(400).json({ error: "Internal server error" });
   }

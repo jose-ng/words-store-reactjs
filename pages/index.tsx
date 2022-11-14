@@ -1,3 +1,4 @@
+import { Query } from "mongoose";
 import type { NextPage } from "next";
 import { CSSProperties, useEffect, useState } from "react";
 import Header from "../components/Header";
@@ -8,7 +9,12 @@ import URL_API from "../utils/env";
 const Home: NextPage = () => {
   const [listWords, setListWords] = useState([]);
   const [showNotes, setShowNotes] = useState(false);
+  const [nextResults, setNextResults] = useState(0);
   const [ip, setIp] = useState("");
+  const [totalRecords, setTotalRecords] = useState(0);
+  const [totalShowRecords, setTotalShowRecords] = useState(0);
+  const [query, setQuery] = useState(null);
+  const [limitResult, setLimitResult] = useState(10);
 
   useEffect(() => {
     const getIp = async () => {
@@ -45,34 +51,58 @@ const Home: NextPage = () => {
           };
         });
       } else {
+        const data = { q: q || query, skip: nextResults, limit: limitResult };
+        if (data.q && listWords.length == 0) {
+          data.skip = 0;
+        }
+
         res = await fetch(`${URL_API}/word/search`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(q),
+          body: JSON.stringify(data),
         });
         res = await res.json();
-        
-        res = res.map((item: any) => {
+        const tWords = res.totalWords;
+        setTotalRecords(tWords);
+        const words = res.words.map((item: any) => {
           return {
             ...item,
             hideAllText: true,
           };
         });
+
+        if (listWords.length > 0 && data.skip > 0) {
+          res = [...listWords, ...words];
+          setTotalShowRecords(limitResult * (data.skip + 1));
+        } else {
+          res = words;
+          setTotalShowRecords(words.length);
+        }
       }
+
       setListWords(res);
     } catch (err) {}
   };
 
   useEffect(() => {
+    setNextResults(0);
+    setTotalRecords(0);
     setListWords([]);
     getInfo();
   }, [showNotes]);
 
   const handlerSearch = (q = null) => {
-    getInfo(q);
+    setTotalRecords(0);
+    setQuery(q);
+    setListWords([]);
+    setNextResults(0);
   };
+
+  useEffect(() => {
+    getInfo();
+  }, [nextResults, query]);
 
   const handlerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -97,7 +127,14 @@ const Home: NextPage = () => {
             onChange={handlerInput}
           />
         </div>
-        <Search onSearch={handlerSearch} />
+        <Search showNotes={showNotes} onSearch={handlerSearch} />
+        {!showNotes && <span>{" Total show words: " + totalShowRecords}</span>}
+        {!showNotes && (
+          <span>
+            {` Total words ${query ? "with '" + query + "'" : ""}: ` +
+              totalRecords}
+          </span>
+        )}
         <Listwords
           listWords={listWords}
           showNotes={showNotes}
@@ -105,19 +142,36 @@ const Home: NextPage = () => {
           ip={ip}
         />
         {listWords.length > 0 && (
-        <footer>
-          <span className="ip">{ip || ":/ "} </span>
-          {!ip && (
-            <input
-              name="ipBox"
-              placeholder="Set Code"
-              onChange={handlerInput}
-            ></input>
-          )}
-        </footer>
-      )}
+          <>
+            {!showNotes && (
+              <>
+                <br />
+                <button
+                  disabled={listWords.length >= totalRecords}
+                  type="button"
+                  onClick={() => {
+                    const skip = nextResults + 1;
+                    setNextResults(skip);
+                  }}
+                >
+                  Load More
+                </button>
+                <br />
+              </>
+            )}
+            <footer>
+              <span className="ip">{ip || ":/ "} </span>
+              {!ip && (
+                <input
+                  name="ipBox"
+                  placeholder="Set Code"
+                  onChange={handlerInput}
+                ></input>
+              )}
+            </footer>
+          </>
+        )}
       </main>
-      
     </>
   );
 };

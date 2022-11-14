@@ -50,30 +50,34 @@ function Listwords({ listWords = [], showNotes, setListWords, ip }: any) {
     <section className={styles.ListContainer}>
       <ul>
         {listWords.length > 0 &&
-          listWords.map((item: any) => {
+          listWords.map((item: any, index: any) => {
             const classItem = item.hideAllText
               ? classNames(styles["Item"], styles["Item_HideAllText"])
               : styles["Item"];
             return (
-              <li className={classItem} key={item._id}>
-                <button
-                  disabled={sending}
-                  type="button"
-                  onClick={() =>
-                    handlerUpdateRatingWord({ id: item._id, rating: 1 })
-                  }
-                >
-                  &#8593;
-                </button>
-                <button
-                  disabled={sending}
-                  type="button"
-                  onClick={() =>
-                    handlerUpdateRatingWord({ id: item._id, rating: -1 })
-                  }
-                >
-                  &#8595;
-                </button>
+              <li className={classItem} key={item._id + "_" + index}>
+                {!showNotes && (
+                  <>
+                    <button
+                      disabled={sending}
+                      type="button"
+                      onClick={() =>
+                        handlerUpdateRatingWord({ id: item._id, rating: 1 })
+                      }
+                    >
+                      &#8593;
+                    </button>
+                    <button
+                      disabled={sending}
+                      type="button"
+                      onClick={() =>
+                        handlerUpdateRatingWord({ id: item._id, rating: -1 })
+                      }
+                    >
+                      &#8595;
+                    </button>
+                  </>
+                )}
                 {item.hideAllText ? (
                   <>
                     &bull; &nbsp;
@@ -86,7 +90,7 @@ function Listwords({ listWords = [], showNotes, setListWords, ip }: any) {
                           handlerList(item, !item.hideAllText);
                         }}
                       >
-                        <span>{(item.rating || 0) + " "}</span>
+                        {!showNotes && <span>{(item.rating || 0) + " "}</span>}
                         <Image
                           src={eyeOpen}
                           alt={"alt"}
