@@ -98,11 +98,12 @@ const Home: NextPage = () => {
     getInfo();
   }, [showNotes]);
 
-  const handlerSearch = (q = null) => {
+  const handlerSearch = (q = null, reload = false) => {
     setTotalRecords(0);
     setQuery(q);
     setListWords([]);
     setNextResults(0);
+    if (reload) getInfo();
   };
 
   useEffect(() => {

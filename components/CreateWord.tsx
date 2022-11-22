@@ -20,21 +20,21 @@ function CreateWord({ onCancel, onSearch, ip }: any) {
         },
         body: JSON.stringify(form),
       });
-      
+
       if (res.ok) {
         setSending(false);
         setForm({ text_es: "", text_en: "", ip: ip });
         onCancel();
-        onSearch();
+        onSearch(null, true);
       } else {
         setSending(false);
         if (res.status === 403) setErrorMsg("Action not allowed");
       }
     } catch (err) {
-      setSending(false);      
+      setSending(false);
       setErrorMsg("Server error");
     }
-  }
+  };
 
   const handlerSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -70,7 +70,7 @@ function CreateWord({ onCancel, onSearch, ip }: any) {
       {errorMsg && (
         <>
           <br />
-          <div className={styles['Error']}>{errorMsg}</div>
+          <div className={styles["Error"]}>{errorMsg}</div>
         </>
       )}
       <br />
