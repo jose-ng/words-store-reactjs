@@ -16,13 +16,7 @@ a {
   box-sizing: border-box;
 }
 
-main {
-  max-width: 1024px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  height: 100vh
-}
+
 footer {
   margin: auto 0 0;
 }
@@ -39,4 +33,15 @@ h4 {
     color: white;
     background: black;
   }
+}
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
 }

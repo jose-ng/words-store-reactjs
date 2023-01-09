@@ -1,0 +1,9 @@
+@import "../../styles/variables";
+
+.Title {
+  margin-bottom: 1rem;
+  // Media Queries (Mobile first approach)
+  @media (min-width: ($medium+1)) {
+    margin-bottom: 0;
+  }
+}

@@ -12,14 +12,14 @@ export default async function addWord(
   res: NextApiResponse
 ) {
   try {
-    if (!allowCreate(req.body.ip)) {
+    if (!allowCreate(req.body.code)) {
       res.status(403).json({ error: "forbbiden" });
       return;
     }
 
     await connectMongo();
     const newWord = req.body;
-    delete newWord.ip;
+    delete newWord.code;
     const word = await Word.create(newWord);
 
     res.status(201).json({ word });

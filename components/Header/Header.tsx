@@ -1,20 +1,25 @@
-import React, { useState } from "react";
-import CreateNote from "./CreateNote";
-import CreateWord from "./CreateWord";
-import styles from "./Header.module.scss";
+// import React, { useState } from "react";
+// import CreateNote from "./CreateNote";
+// import CreateWord from "./CreateWord";
 
-function Header({ onSearch, ip }: any) {
-  const [showCreateBtn, setShowCreateBtn] = useState(false);
-  const [showNoteBtn, setShowNoteBtn] = useState(false);
-  const handlerCancel = () => {
-    setShowNoteBtn(false);
-    setShowCreateBtn(false);
-  };
+
+import styles from "./Header.module.scss";
+interface Props {
+  children: React.ReactNode;
+  
+}
+function Header({ children }: Props) {
+  // const [showCreateBtn, setShowCreateBtn] = useState(false);
+  // const [showNoteBtn, setShowNoteBtn] = useState(false);
+  // const handlerCancel = () => {
+  //   setShowNoteBtn(false);
+  //   setShowCreateBtn(false);
+  // };
   return (
     <>
-      <header className={styles.HeaderContainer}>
-        <h1>Words translation</h1>
-        <nav>
+      <header className={styles.Wrapper}>
+        {children}
+        {/* <nav>
           {!showCreateBtn && !showNoteBtn && (
             <button
               type="button"
@@ -60,7 +65,7 @@ function Header({ onSearch, ip }: any) {
               Cancel
             </button>
           )}
-        </nav>
+        </nav> */}
       </header>
     </>
   );

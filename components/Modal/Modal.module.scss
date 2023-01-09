@@ -1,0 +1,45 @@
+@import "../../styles/variables";
+
+.Modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  transition: opacity 0.4s ease;
+  opacity: 1;
+  z-index: 1000;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0 20px;
+
+  &-Container {
+    padding: 2rem;
+    position: relative;
+    width: 90%;
+    height: auto;
+    min-height: 350px;
+    box-shadow: none;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    top: 10%;
+  }
+
+  &-CloseBtn {
+    // @extend .p-1;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+@media (min-width: $x-large) {
+  .Modal {
+    &-Container {
+      max-width: 800px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

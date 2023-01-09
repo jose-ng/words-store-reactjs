@@ -2,8 +2,8 @@ import React, { CSSProperties, useState } from "react";
 import URL_API from "../utils/env";
 import styles from "./Create.module.scss";
 
-function CreateWord({ onCancel, onSearch, ip }: any) {
-  const [form, setForm] = useState({ text_es: "", text_en: "", ip: ip });
+function CreateWord1({ onSearch }: any) {
+  const [form, setForm] = useState({ text_es: "", text_en: "", code: "" });
   const [sending, setSending] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -12,7 +12,7 @@ function CreateWord({ onCancel, onSearch, ip }: any) {
     setSending(true);
     setErrorMsg("");
     try {
-      if (!form.text_en || !form.text_es) return;
+      if (!form.text_en || !form.text_es || !form.code) return;
       const res = await fetch(`${URL_API}/word/add`, {
         method: "POST",
         headers: {
@@ -23,8 +23,7 @@ function CreateWord({ onCancel, onSearch, ip }: any) {
 
       if (res.ok) {
         setSending(false);
-        setForm({ text_es: "", text_en: "", ip: ip });
-        onCancel();
+        setForm({ text_es: "", text_en: "", code: "" });
         onSearch(null, true);
       } else {
         setSending(false);
@@ -74,10 +73,24 @@ function CreateWord({ onCancel, onSearch, ip }: any) {
         </>
       )}
       <br />
+      <input
+        type="text"
+        name="code"
+        placeholder="code"
+        value={form.code}
+        onChange={handlerSearch}
+      />
+      {errorMsg && (
+        <>
+          <br />
+          <div className={styles["Error"]}>{errorMsg}</div>
+        </>
+      )}
+      <br />
       <button
         type="submit"
         disabled={sending}
-        onClick={handlerSendWord}
+        //onClick={()=>handlerSendWord()}
         style={buttonStyle}
       >
         Send
@@ -86,4 +99,4 @@ function CreateWord({ onCancel, onSearch, ip }: any) {
   );
 }
 
-export default CreateWord;
+export default CreateWord1;
