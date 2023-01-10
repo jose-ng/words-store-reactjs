@@ -19,7 +19,6 @@ export default async function addNote(
 
     await connectMongo();
     const newNote = req.body;
-    delete newNote.ip;
     const note = await Note.create(newNote);
 
     res.status(201).json({ note });

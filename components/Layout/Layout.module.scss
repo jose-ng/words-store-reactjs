@@ -2,7 +2,7 @@
 
 .Layout {
   width: 100%;
-  margin: 10px;
+  padding: 10px;
   // Media Queries (Mobile first approach)
   @media (min-width: ($medium+1)) {
     width: 90%;

@@ -1,47 +1,52 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import URL_API from "../utils/env";
 
-function useStateWords() {
+function useSearch() {
   const [listWords, setListWords] = useState([]);
   const [showNotes, setShowNotes] = useState(false);
   const [nextResults, setNextResults] = useState(0);
-  const [ip, setIp] = useState("");
   const [totalRecords, setTotalRecords] = useState(0);
   const [totalShowRecords, setTotalShowRecords] = useState(0);
-  const [query, setQuery] = useState(null);
+  const [query, setQuery] = useState<string>("");
   const [limitResult, setLimitResult] = useState(20);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const notInitialRender = useRef(false); // Used for avoid the initial useEffect for 'query' search
 
-  useEffect(() => {
-    setNextResults(0);
-    setTotalRecords(0);
+  const performSearch = () => {
     setListWords([]);
+    setTotalRecords(0);
+    setNextResults(0);
     getInfo();
-  }, [showNotes]);
+  };
 
-   const handlerSearch = (q = null, reload = false) => {
-    setTotalRecords(0);
+  const handlerSearch = (q: string) => {
     setQuery(q);
-    setListWords([]);
-    setNextResults(0);
-    if (reload) getInfo();
   };
 
   useEffect(() => {
-    const getIp = async () => {
-      try {
-        const res = await fetch(
-          "https://ipgeolocation.abstractapi.com/v1/?api_key=fdbbbaefc0114c39afb9109fbf3024cc"
-        );
-        const ipObj = await res.json();
-        setIp(ipObj.ip_address);
-      } catch {
-        console.log("error IP");
-      }
-    };
-    getIp();
-  }, []);
+    console.log("1");
+    performSearch();
+  }, [showNotes]);
+
+  useEffect(() => {
+    if (notInitialRender.current) {
+      console.log("2");
+      getInfo();
+    }
+  }, [nextResults]);
+
+  useEffect(() => {
+    if (notInitialRender.current) {
+      const delayDebounceFn = setTimeout(() => {
+        console.log("3");
+        performSearch();
+      }, 300);
+      return () => clearTimeout(delayDebounceFn);
+    } else {
+      notInitialRender.current = true;
+    }
+  }, [query]);
 
   const getInfo = async (q = null) => {
     try {
@@ -97,7 +102,8 @@ function useStateWords() {
 
       setListWords(res);
       setLoading(false);
-    } catch (err) {
+    } catch (err: any) {
+      setError(err);
       setLoading(false);
     }
   };
@@ -109,22 +115,11 @@ function useStateWords() {
     setShowNotes,
     nextResults,
     setNextResults,
-    ip,
-    setIp,
     totalRecords,
-    setTotalRecords,
     totalShowRecords,
-    setTotalShowRecords,
     query,
-    setQuery,
-    limitResult,
-    setLimitResult,
     loading,
-    setLoading,
-    error,
-    setError,
-    getInfo,
-    handlerSearch
+    handlerSearch,
   };
 }
-export default useStateWords;
+export default useSearch;

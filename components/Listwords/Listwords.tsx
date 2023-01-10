@@ -1,10 +1,10 @@
 import styles from "./List.module.scss";
 import classNames from "classnames";
-import eyeOpen from "../public/eye-open.svg";
-import eyeClose from "../public/eye-close.svg";
+import eyeOpen from "../../public/eye-open.svg";
+import eyeClose from "../../public/eye-close.svg";
 import Image from "next/image";
 import { useState } from "react";
-import URL_API from "../utils/env";
+import URL_API from "../../utils/env";
 
 function Listwords({ listWords = [], showNotes, setListWords, ip }: any) {
   const [sending, setSending] = useState(false);

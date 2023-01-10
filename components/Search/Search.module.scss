@@ -1,4 +1,5 @@
 .SearchContainer {
+  margin: 10px 0;
   div {
     position: relative;
     display: inline-block;
@@ -11,6 +12,6 @@
     cursor: pointer;
     outline: inherit;
     position: absolute;
-    right: 0;
+    right: 5px;
   }
 }

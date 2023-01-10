@@ -1,8 +1,5 @@
-import { useState } from "react";
 import useCreate from "../../hooks/useCreate";
-import useHeader from "../../hooks/useCreate";
 import useModal from "../../hooks/useModal";
-import useStateWords from "../../hooks/useStateWords";
 import ContainerCreate from "../ContainerCreate/ContainerCreate";
 import CreateNote from "../CreateNote/CreateNote";
 import CreateWord from "../CreateWord/CreateWord";
@@ -15,30 +12,6 @@ import NavLinks from "../NavLinks/NavLinks";
 import styles from "./Layout.module.scss";
 
 function Layout({ children }: any) {
-  const {
-    listWords,
-    setListWords,
-    showNotes,
-    setShowNotes,
-    nextResults,
-    setNextResults,
-    ip,
-    setIp,
-    totalRecords,
-    setTotalRecords,
-    totalShowRecords,
-    setTotalShowRecords,
-    query,
-    setQuery,
-    limitResult,
-    setLimitResult,
-    loading,
-    setLoading,
-    error,
-    setError,
-    getInfo,
-  } = useStateWords();
-
   const { modalIsOpen, modalCloseHanlder, modalOpenHandler } = useModal();
   const {
     handlerSubmit,
