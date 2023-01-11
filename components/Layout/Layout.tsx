@@ -24,7 +24,7 @@ function Layout({ children }: any) {
     setCreateOption,
   } = useCreate();
 
-  const chooseCreateOptionHandler = (option: string) => {
+  const chooseCreateOptionHandler = (option: "word" | "note" | "") => {
     setCreateOption(option);
     modalOpenHandler();
   };
@@ -46,7 +46,6 @@ function Layout({ children }: any) {
         }}
       >
         <ContainerCreate
-          createOption={createOption}
           error={errorCreate}
           onError={() => <ErrorMessage msg={errorCreate} />}
         >

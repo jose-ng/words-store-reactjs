@@ -2,10 +2,10 @@ import { useState } from "react";
 import URL_API from "../utils/env";
 
 function useCreate() {
-  const [createOption, setCreateOption] = useState("");
+  const [createOption, setCreateOption] = useState<"word" | "note" | "">();
   const [form, setForm] = useState<any>({});
   const [sending, setSending] = useState(false);
-  const [errorCreate, setErrorCreate] = useState("");
+  const [errorCreate, setErrorCreate] = useState<string>();
 
   const handlerSubmit = async (path: string) => {
     setSending(true);
