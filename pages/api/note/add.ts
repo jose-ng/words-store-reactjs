@@ -12,7 +12,7 @@ export default async function addNote(
   res: NextApiResponse
 ) {
   try {
-    if (!allowCreate(req.body.ip)) {
+    if (!allowCreate(req.body.code)) {
       res.status(403).json({ error: "forbbiden" });
       return;
     }
