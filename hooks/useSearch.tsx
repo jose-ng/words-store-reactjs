@@ -48,10 +48,11 @@ function useSearch() {
     }
   }, [query]);
 
-  const getInfo = async (q = null) => {
+  const getInfo = async (q?: string) => {
     try {
       setLoading(true);
       let res: any = {};
+      q = q || query;
       if (showNotes) {
         res = await fetch(`${URL_API}/note/search`, {
           method: "POST",
