@@ -1,3 +1,4 @@
+"use client"
 import styles from "./List.module.scss";
 import classNames from "classnames";
 import eyeOpen from "../../public/eye-open.svg";

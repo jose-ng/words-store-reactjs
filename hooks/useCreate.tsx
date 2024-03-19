@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import URL_API from "../utils/env";
 
@@ -74,4 +75,4 @@ function useCreate() {
   };
 }
 
-export default useCreate;
+export { useCreate };

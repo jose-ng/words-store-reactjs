@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 
 function useModal() {
@@ -17,4 +18,4 @@ function useModal() {
   };
 }
 
-export default useModal;
+export { useModal };

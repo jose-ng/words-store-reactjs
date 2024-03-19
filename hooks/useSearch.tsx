@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useRef, useState } from "react";
 import URL_API from "../utils/env";
 
@@ -54,8 +55,8 @@ function useSearch() {
       let res: any = {};
       q = q || query;
       if (showNotes) {
-        res = await fetch(`${URL_API}/note/search`, {
-          method: "POST",
+        res = await fetch(`${URL_API}/note`, {
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
@@ -75,12 +76,12 @@ function useSearch() {
           data.skip = 0;
         }
 
-        res = await fetch(`${URL_API}/word/search`, {
-          method: "POST",
+        res = await fetch(URL_API + '/word?q=' + q + '&skip=' + nextResults + '&limit=' + limitResult, {
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          // body: JSON.stringify(data),
         });
         res = await res.json();
         const tWords = res.totalWords;
@@ -123,4 +124,4 @@ function useSearch() {
     handlerSearch,
   };
 }
-export default useSearch;
+export { useSearch };

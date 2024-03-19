@@ -1,5 +1,6 @@
-import useCreate from "../../hooks/useCreate";
-import useModal from "../../hooks/useModal";
+"use client"
+import { useModal } from "@hooks/useModal";
+import { useCreate } from "@hooks/useCreate";
 import ContainerCreate from "../ContainerCreate/ContainerCreate";
 import CreateNote from "../CreateNote/CreateNote";
 import CreateWord from "../CreateWord/CreateWord";
@@ -31,6 +32,7 @@ function Layout({ children }: any) {
 
   return (
     <main className={styles["Layout"]}>
+      {children}
       <Header>
         <Nav>
           <Logo />
@@ -77,4 +79,4 @@ function Layout({ children }: any) {
   );
 }
 
-export default Layout;
+export { Layout };
