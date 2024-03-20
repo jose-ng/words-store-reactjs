@@ -55,12 +55,11 @@ function useSearch() {
       let res: any = {};
       q = q || query;
       if (showNotes) {
-        res = await fetch(`${URL_API}/note`, {
+        res = await fetch(URL_API + '/note?q=' + q + '&skip=' + nextResults + '&limit=' + limitResult, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-          },
-          body: JSON.stringify(q),
+          }
         });
         res = await res.json();
 

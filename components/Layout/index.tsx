@@ -32,7 +32,6 @@ function Layout({ children }: any) {
 
   return (
     <main className={styles["Layout"]}>
-      {children}
       <Header>
         <Nav>
           <Logo />
@@ -55,7 +54,7 @@ function Layout({ children }: any) {
             <CreateWord
               onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
                 e.preventDefault();
-                handlerSubmit("word/add");
+                handlerSubmit("word");
               }}
               onChangeValue={handlerChangeValue}
               form={form}
@@ -66,7 +65,7 @@ function Layout({ children }: any) {
             <CreateNote
               onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
                 e.preventDefault();
-                handlerSubmit("note/add");
+                handlerSubmit("note");
               }}
               onChangeValue={handlerChangeValue}
               form={form}
