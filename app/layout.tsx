@@ -14,8 +14,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const title = metadata.title;
   return (
     <html lang="en">
+      <head>
+        <title>{title?.toString()}</title>
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );

@@ -23,6 +23,7 @@ const Home: NextPage = () => {
 
   const handlerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.checked;
+    debugger
     setShowNotes(value);
   };
 
