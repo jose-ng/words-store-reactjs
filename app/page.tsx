@@ -3,7 +3,7 @@
 import type { NextPage } from "next";
 import Listwords from "../components/Listwords/Listwords";
 import Search from "../components/Search/Search";
-import { Layout } from "../components/Layout/Layout";
+import { Layout } from "@components/Layout";
 import { useSearch } from "@hooks/useSearch";
 
 const Home: NextPage = () => {
