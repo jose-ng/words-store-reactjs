@@ -1,6 +1,7 @@
 @import "../../styles/variables";
 
 .Title {
+  font-size: 28px;
   margin-bottom: 1rem;
   // Media Queries (Mobile first approach)
   @media (min-width: ($medium+1)) {
