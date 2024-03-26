@@ -1,9 +1,11 @@
 .SearchContainer {
   margin: 10px 0;
+
   div {
     position: relative;
     display: inline-block;
   }
+
   button {
     background: none;
     color: inherit;
@@ -13,5 +15,6 @@
     outline: inherit;
     position: absolute;
     right: 5px;
+    top: 5px;
   }
 }
