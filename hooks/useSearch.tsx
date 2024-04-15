@@ -9,7 +9,7 @@ function useSearch() {
   const [totalRecords, setTotalRecords] = useState(0);
   const [totalShowRecords, setTotalShowRecords] = useState(0);
   const [query, setQuery] = useState<string>("");
-  const [limitResult, setLimitResult] = useState(20);
+  const [limitResult, setLimitResult] = useState(100);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const notInitialRender = useRef(false); // Used for avoid the initial useEffect for 'query' search
