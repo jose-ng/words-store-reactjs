@@ -84,7 +84,7 @@ function Listwords({ listWords = [], showNotes, setListWords, ip }: any) {
                     &bull; &nbsp;
                     <span>
                       {showNotes ? item.title : item.text_en}:{" "}
-                      {showNotes ? item.text : item.text_es}
+                      {showNotes ? item.text : <span className="text-gray-800 hover:text-white">{item.text_es}</span>}
                       <span
                         className={styles["Eye"]}
                         onClick={() => {
