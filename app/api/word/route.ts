@@ -55,3 +55,26 @@ export async function POST(
     return Response.json({ error: "Internal server error" });
   }
 }
+
+export async function PATCH(
+  req: Request
+) {
+  try {
+    const body = await req.json();
+    if (!allowCreate(body.code)) {
+      return Response.json({ error: "forbbiden" });      
+    }
+
+    await connectMongo();
+    const word = await Word.findById(body.id).exec();
+    const updated = await Word.findOneAndUpdate(
+      { _id: body.id },
+      { rating: (word.rating || 0) + body.rating },
+      { new: true }
+    ).exec();
+
+    return Response.json({ updated });
+  } catch (err) {
+    return Response.json({ error: "Internal server error" });
+  }
+}

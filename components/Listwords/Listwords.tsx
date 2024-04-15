@@ -16,8 +16,8 @@ function Listwords({ listWords = [], showNotes, setListWords, ip }: any) {
       if (sending) return;
       setSending(true);
       data.ip = ip;
-      const res = await fetch(`${URL_API}/word/updateRating`, {
-        method: "POST",
+      const res = await fetch(`${URL_API}/word`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
