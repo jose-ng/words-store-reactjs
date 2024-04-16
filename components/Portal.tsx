@@ -18,4 +18,4 @@ const Portal = ({ children }: Props) => {
   return mounted ? createPortal(children, portalEl) : null;
 };
 
-export default Portal;
+export { Portal };

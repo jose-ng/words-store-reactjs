@@ -1,32 +1,43 @@
-import Portal from "../Portal";
-import styles from "./Modal.module.scss";
+"use client"
+import { Portal } from "../Portal";
 
-function Modal({ children, isOpen, onClose }: any) {
+interface ModalProps {
+  children: React.ReactNode;
+  isOpen: Boolean;
+  onClose: () => void;
+}
+
+function Modal({ children, isOpen, onClose }: ModalProps) {
+
   if (!isOpen) {
     return null;
   }
 
   return (
     <Portal>
-      <section className={styles["Modal"]}>
-        <div className={styles["Modal-Container"]}>
-          <button
-            type="button"
-            onClick={onClose}
-            className={styles["Modal-CloseBtn"]}
-          >
+      <div
+        className="fixed top-0 flex items-center justify-center z-[1] h-full w-full bg-black/40 overflow-auto"
+        onClick={onClose}
+      >
+        <div
+          className="w-3/4 p-5 bg-slate-300 rounded-lg relative"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <button type="button" className="text-xl absolute right-0" onClick={onClose}>
             X
           </button>
           {children}
         </div>
-      </section>
+      </div>
     </Portal>
-  );
+  )
 }
 
-export default Modal;
+export { Modal };
 
-// How to use it
+//How to use it
 
 /*
 import Modal from '../Modal/Modal';
@@ -34,17 +45,17 @@ import Modal from '../Modal/Modal';
 const Component = () => {
   
   const [modalIsOpen, setModalIsOpen] = useState(true);
-  const handleOpenModal = () => {
+          nst handleOpenModal = () => {
     setModalIsOpen(true);
   };
-  const handleCloseModal = () => {
-    setModalIsOpen(false);
+          nst handleCloseModal = () => {
+odalIsOpen(false);
   };
 
-  return (
-    <>
-      <Modal isOpen={modalIsOpen} onClose={handleCloseModal}>
-        ...
+             
+          
+            dal isOpen={modalIsOpen} onClose={handleCloseModal}>
+         ...
       </Modal>
     </>
   );

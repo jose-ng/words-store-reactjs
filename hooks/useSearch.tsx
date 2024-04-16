@@ -26,13 +26,11 @@ function useSearch() {
   };
 
   useEffect(() => {
-    console.log("1");
     performSearch();
   }, [showNotes]);
 
   useEffect(() => {
     if (notInitialRender.current) {
-      console.log("2");
       getInfo();
     }
   }, [nextResults]);
@@ -40,7 +38,6 @@ function useSearch() {
   useEffect(() => {
     if (notInitialRender.current) {
       const delayDebounceFn = setTimeout(() => {
-        console.log("3");
         performSearch();
       }, 300);
       return () => clearTimeout(delayDebounceFn);

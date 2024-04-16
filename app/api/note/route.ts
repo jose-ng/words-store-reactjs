@@ -10,7 +10,6 @@ import { NextRequest } from "next/server";
 export async function GET(
   req: NextRequest
 ) {
-  console.log("🚀 ~ req:", req.body)
   try {
     await connectMongo();
     let paramsRaw = req.nextUrl.searchParams;

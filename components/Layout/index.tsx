@@ -7,10 +7,9 @@ import CreateWord from "../CreateWord/CreateWord";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Header from "../Header/Header";
 import Logo from "../Logo/Logo";
-import Modal from "../Modal/Modal";
+import { Modal } from "../Modal/Modal";
 import Nav from "../Nav/Nav";
 import NavLinks from "../NavLinks/NavLinks";
-import styles from "./Layout.module.scss";
 
 function Layout({ children }: any) {
   const { modalIsOpen, modalCloseHanlder, modalOpenHandler } = useModal();
@@ -31,14 +30,17 @@ function Layout({ children }: any) {
   };
 
   return (
-    <main className={styles["Layout"]}>
+    <>
       <Header>
+        <Logo />
         <Nav>
-          <Logo />
           <NavLinks onOptionHandler={chooseCreateOptionHandler} />
         </Nav>
       </Header>
-      {children}
+      <main className="w-full p-4">
+        {children}
+
+      </main>
       <Modal
         isOpen={modalIsOpen}
         onClose={() => {
@@ -73,8 +75,36 @@ function Layout({ children }: any) {
             />
           )}
         </ContainerCreate>
+
+        {/* <ContainerCreate
+          error={errorCreate}
+          onError={() => <ErrorMessage msg={errorCreate} />}
+        >
+          {createOption === "word" && (
+            <CreateWord
+              onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
+                e.preventDefault();
+                handlerSubmit("word");
+              }}
+              onChangeValue={handlerChangeValue}
+              form={form}
+              sending={sending}
+            />
+          )}
+          {createOption === "note" && (
+            <CreateNote
+              onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
+                e.preventDefault();
+                handlerSubmit("note");
+              }}
+              onChangeValue={handlerChangeValue}
+              form={form}
+              sending={sending}
+            />
+          )}
+        </ContainerCreate> */}
       </Modal>
-    </main>
+    </>
   );
 }
 

@@ -28,7 +28,6 @@ export default async function updateRating(
 
     res.status(200).json(updated);
   } catch (err) {
-    console.log(err);
     res.status(400).json({ error: err });
   }
 }
