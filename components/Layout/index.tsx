@@ -92,7 +92,7 @@ function Layout({ onSearch, children }: any) {
         </ContainerCreate>
         }
       </Modal>
-      <button type="button" className="fixed right-14 p-3 bottom-5 w-15 h-15 bg-red-500 rounded-full" onClick={() => {
+      <button type="button" className="fixed right-14 p-3 bottom-5 w-15 h-15 bg-yellow-500 hover:bg-yellow-600 rounded-full" onClick={() => {
         setOpenModalWorkOut(true);
         modalOpenHandler();
       }}>

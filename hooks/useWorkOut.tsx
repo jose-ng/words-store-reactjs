@@ -33,7 +33,8 @@ function useWorkOut() {
                 return {
                     _id: word._id,
                     text_en: word.text_en,
-                    text_es: word.text_es
+                    text_es: word.text_es,
+                    rating: word.rating
                 };
             });
 
