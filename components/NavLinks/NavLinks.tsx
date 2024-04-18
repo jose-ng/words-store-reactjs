@@ -1,14 +1,12 @@
-import styles from "./NavLinks.module.scss";
-
 function NavLinks({ onOptionHandler }: any) {
   return (
-    <ul className={styles.Controls}>
-      <li>
+    <ul className="flex">
+      <li >
         <button type="button" onClick={() => onOptionHandler("word")}>
           Add Word
         </button>
       </li>
-      <li>
+      <li className="pl-3">
         <button type="button" onClick={() => onOptionHandler("note")}>
           Add Note
         </button>

@@ -8,6 +8,7 @@ const wordSchema = new Schema({
     min: -100000,
     max: 100000,
   },
+  group: Number
 });
 
 const Word = models.Word || model("Word", wordSchema);

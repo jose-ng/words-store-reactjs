@@ -1,8 +1,5 @@
-import React from "react";
-import styles from "./Logo.module.scss";
-
 function Logo() {
-  return <h1 className={styles.Title}>English Words</h1>;
+  return <h1 className="text-2xl mb-1">English Words</h1>;
 }
 
 export default Logo;

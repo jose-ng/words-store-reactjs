@@ -7,12 +7,11 @@ import CreateWord from "../CreateWord/CreateWord";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Header from "../Header/Header";
 import Logo from "../Logo/Logo";
-import Modal from "../Modal/Modal";
+import { Modal } from "../Modal/Modal";
 import Nav from "../Nav/Nav";
 import NavLinks from "../NavLinks/NavLinks";
-import styles from "./Layout.module.scss";
 
-function Layout({ children }: any) {
+function Layout({ onSearch, children }: any) {
   const { modalIsOpen, modalCloseHanlder, modalOpenHandler } = useModal();
   const {
     handlerSubmit,
@@ -31,14 +30,17 @@ function Layout({ children }: any) {
   };
 
   return (
-    <main className={styles["Layout"]}>
+    <>
       <Header>
+        <Logo />
         <Nav>
-          <Logo />
           <NavLinks onOptionHandler={chooseCreateOptionHandler} />
         </Nav>
       </Header>
-      {children}
+      <main className="w-full p-4">
+        {children}
+
+      </main>
       <Modal
         isOpen={modalIsOpen}
         onClose={() => {
@@ -55,6 +57,9 @@ function Layout({ children }: any) {
               onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
                 e.preventDefault();
                 handlerSubmit("word");
+                resetValues();
+                modalCloseHanlder();
+                onSearch("", true);
               }}
               onChangeValue={handlerChangeValue}
               form={form}
@@ -66,6 +71,9 @@ function Layout({ children }: any) {
               onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
                 e.preventDefault();
                 handlerSubmit("note");
+                resetValues();
+                modalCloseHanlder();
+                onSearch("", true);
               }}
               onChangeValue={handlerChangeValue}
               form={form}
@@ -74,7 +82,7 @@ function Layout({ children }: any) {
           )}
         </ContainerCreate>
       </Modal>
-    </main>
+    </>
   );
 }
 
