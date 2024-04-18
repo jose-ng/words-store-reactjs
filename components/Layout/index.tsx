@@ -10,9 +10,12 @@ import Logo from "../Logo/Logo";
 import { Modal } from "../Modal/Modal";
 import Nav from "../Nav/Nav";
 import NavLinks from "../NavLinks/NavLinks";
+import { WorkOut } from "../WorkOut/WorkOut";
+import { useWorkOut } from "@/hooks/useWorkOut";
 
 function Layout({ onSearch, children }: any) {
   const { modalIsOpen, modalCloseHanlder, modalOpenHandler } = useModal();
+  const { openModalWorkOut, setOpenModalWorkOut, setListWords, listWords, loading } = useWorkOut();
   const {
     handlerSubmit,
     handlerChangeValue,
@@ -39,15 +42,21 @@ function Layout({ onSearch, children }: any) {
       </Header>
       <main className="w-full p-4">
         {children}
-
       </main>
+
       <Modal
         isOpen={modalIsOpen}
         onClose={() => {
           resetValues();
           modalCloseHanlder();
+          setOpenModalWorkOut(false);
         }}
-      >
+      >{openModalWorkOut ?
+        <WorkOut
+          listWords={listWords}
+          setListWords={setListWords}
+          loading={loading}
+        /> :
         <ContainerCreate
           error={errorCreate}
           onError={() => <ErrorMessage msg={errorCreate} />}
@@ -81,7 +90,15 @@ function Layout({ onSearch, children }: any) {
             />
           )}
         </ContainerCreate>
+        }
       </Modal>
+      <button type="button" className="fixed right-14 p-3 bottom-5 w-15 h-15 bg-red-500 rounded-full" onClick={() => {
+        setOpenModalWorkOut(true);
+        modalOpenHandler();
+      }}>
+        Workout
+      </button>
+
     </>
   );
 }
