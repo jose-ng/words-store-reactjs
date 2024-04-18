@@ -11,7 +11,7 @@ import { Modal } from "../Modal/Modal";
 import Nav from "../Nav/Nav";
 import NavLinks from "../NavLinks/NavLinks";
 
-function Layout({ children }: any) {
+function Layout({ onSearch, children }: any) {
   const { modalIsOpen, modalCloseHanlder, modalOpenHandler } = useModal();
   const {
     handlerSubmit,
@@ -57,6 +57,9 @@ function Layout({ children }: any) {
               onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
                 e.preventDefault();
                 handlerSubmit("word");
+                resetValues();
+                modalCloseHanlder();
+                onSearch("", true);
               }}
               onChangeValue={handlerChangeValue}
               form={form}
@@ -68,6 +71,9 @@ function Layout({ children }: any) {
               onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
                 e.preventDefault();
                 handlerSubmit("note");
+                resetValues();
+                modalCloseHanlder();
+                onSearch("", true);
               }}
               onChangeValue={handlerChangeValue}
               form={form}
@@ -75,34 +81,6 @@ function Layout({ children }: any) {
             />
           )}
         </ContainerCreate>
-
-        {/* <ContainerCreate
-          error={errorCreate}
-          onError={() => <ErrorMessage msg={errorCreate} />}
-        >
-          {createOption === "word" && (
-            <CreateWord
-              onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.preventDefault();
-                handlerSubmit("word");
-              }}
-              onChangeValue={handlerChangeValue}
-              form={form}
-              sending={sending}
-            />
-          )}
-          {createOption === "note" && (
-            <CreateNote
-              onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.preventDefault();
-                handlerSubmit("note");
-              }}
-              onChangeValue={handlerChangeValue}
-              form={form}
-              sending={sending}
-            />
-          )}
-        </ContainerCreate> */}
       </Modal>
     </>
   );

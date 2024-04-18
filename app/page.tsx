@@ -28,7 +28,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <Layout>
+    <Layout onSearch={handlerSearch}>
       <section>
         <div>
           Show notes{" "}
