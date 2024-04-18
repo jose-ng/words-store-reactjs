@@ -20,7 +20,7 @@ function useWorkOut() {
         try {
 
             const skipRandom = Math.floor(Math.random() * (skip || 30));
-            let res: any = await fetch(URL_API + '/word?q=&skip=' + skipRandom + '&limit=' + limitResult, {
+            let res: any = await fetch(URL_API + '/word?q=&skip=' + skipRandom + '&limit=' + limitResult  + '&order=asc', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

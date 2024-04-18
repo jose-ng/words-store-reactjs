@@ -17,6 +17,7 @@ export async function GET(
     const q = paramsRaw.get('q');
     const skip = paramsRaw.get('skip') || 0;
     const limit = paramsRaw.get('limit') || 10;
+    const order = paramsRaw.get('order') || 'desc';
     let params = {};
     if (q)
       params = {
@@ -28,7 +29,7 @@ export async function GET(
     const words = await Word.find(params)
       .skip(<number>skip * <number>limit)
       .limit(<number>limit)
-      .sort({ rating: "desc" })
+      .sort({ rating: order.toString() === 'asc' ? 1 : -1})
       .exec();
     const totalWords = await Word.count(params).exec();
     return Response.json({ words, totalWords });
