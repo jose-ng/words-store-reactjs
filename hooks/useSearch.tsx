@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useRef, useState } from "react";
 import URL_API from "../utils/env";
+import WordService from "@/services/word.service";
 
 function useSearch() {
   const [listWords, setListWords] = useState([]);
@@ -72,17 +73,12 @@ function useSearch() {
           data.skip = 0;
         }
 
-        res = await fetch(URL_API + '/word?q=' + q + '&skip=' + nextResults + '&limit=' + limitResult, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // body: JSON.stringify(data),
-        });
-        res = await res.json();
-        const tWords = res.totalWords;
+        const wordService = new WordService();
+        res = await wordService.getAllWords(q || "", nextResults, limitResult);
+
+        const tWords = res.total;
         setTotalRecords(tWords);
-        const words = res.words.map((item: any) => {
+        const words = res.list.map((item: any) => {
           return {
             ...item,
             hideAllText: true,
