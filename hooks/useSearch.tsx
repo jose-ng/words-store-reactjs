@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import URL_API from "../utils/env";
 import WordService from "@/services/word.service";
+import NoteService from "@/services/note.service";
 
 function useSearch() {
   const [listWords, setListWords] = useState([]);
@@ -53,17 +54,13 @@ function useSearch() {
       let res: any = {};
       q = q || query;
       if (showNotes) {
-        res = await fetch(URL_API + '/note?q=' + q + '&skip=' + nextResults + '&limit=' + limitResult, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          }
-        });
-        res = await res.json();
+        const noteService = new NoteService();
+        res = await noteService.getAllNotes(q || "", nextResults, limitResult);
 
-        res = res.map((item: any) => {
+        res = res.list.map((item: any) => {
           return {
             ...item,
+            _id: item.id,
             hideAllText: true,
           };
         });
