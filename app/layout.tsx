@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   const title = metadata.title;
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <title>{title?.toString()}</title>
       </head>
