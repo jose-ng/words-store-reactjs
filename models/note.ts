@@ -10,3 +10,5 @@ const noteSchema = new Schema({
 const Note = models.Note || model("Note", noteSchema);
 
 export default Note;
+
+

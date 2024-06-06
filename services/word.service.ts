@@ -1,4 +1,5 @@
 
+import { FormWord } from '@/models/word';
 import { axiosInstance } from '../utils/customAxios';
 
 export default class WordService {
@@ -32,9 +33,34 @@ export default class WordService {
         limit
       },
     };
-    const res = await axiosInstance('apiDomain').post('/graphql', queryGQL);    
+    const res = await axiosInstance('apiDomain').post('/graphql', queryGQL);
     const { errors, words } = res.data.data;
     if (errors) throw new Error(errors[0].message);
     return words;
+  }
+
+  async addWord(text_en: string, text_es: string) {
+    const queryGQL = {
+      query: `
+      mutation ($dto: AddWordDto!) {
+        addWord(dto: $dto) {
+          id,
+          text_es,
+          text_en,
+          rating
+        }
+      }
+    `,
+      variables: {
+        dto: {
+          text_en,
+          text_es,
+        }
+      },
+    };
+    const res = await axiosInstance('apiDomain').post('/graphql', queryGQL);
+    const { errors, word } = res.data.data;
+    if (errors) throw new Error(errors[0].message);
+    return word;
   }
 }

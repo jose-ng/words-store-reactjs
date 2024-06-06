@@ -14,3 +14,8 @@ const wordSchema = new Schema({
 const Word = models.Word || model("Word", wordSchema);
 
 export default Word;
+
+export interface FormWord {
+  text_en?: string;
+  text_es?: string;
+}
