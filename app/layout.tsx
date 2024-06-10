@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.scss";
+import dynamic from "next/dynamic";
+import AuthProvider from "@/providers/AuthProvider";
+import Guard from "@/guards/Guard";
+const ReduxProvider = dynamic(() => import("../utils/redux/redux-provider"), {
+  ssr: false
+});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,9 +27,15 @@ export default function RootLayout({
         <title>{title?.toString()}</title>
       </head>
       <body className={inter.className}>
-        {children}
-        <div id="portal" />
+        <ReduxProvider>
+          <AuthProvider>
+            <Guard>
+              {children}
+              <div id="portal" />
+            </Guard>
+          </AuthProvider>
+        </ReduxProvider>
       </body>
-    </html>
+    </html >
   );
 }

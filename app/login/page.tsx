@@ -1,10 +1,10 @@
 "use client";
-import useAuth from '@/hooks/useAuth'
+import useLogin from '@/hooks/useLogin'
 import Link from 'next/link'
 import React from 'react'
 
 function page() {
-  const { handlerSubmit, form, handlerChangeValue } = useAuth();
+  const { handlerSubmit, form, handlerChangeValue } = useLogin();
 
   return (
     <section className='flex flex-col justify-center h-screen'>

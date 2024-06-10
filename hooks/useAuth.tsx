@@ -1,40 +1,42 @@
-import { FormLogin } from '@/models/auth.models';
-import AuthService from '@/services/auth.service';
-import React, { useState } from 'react'
+import { UserData } from '../models/user.model';
+import { isExpired, decodeToken } from 'react-jwt';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeToken, selectToken } from '../utils/redux/slices/token.slice';
+import { setIsLoggedIn } from '../utils/redux/slices/user.slice';
 
 function useAuth() {
-    let authService: AuthService;
-    const [form, setForm] = useState<FormLogin>({
-        email: '',
-        password: ''
-    });
-    
-    authService = AuthService.create();
-    const handlerSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
+  const dispatch = useDispatch();
+  const { code: authToken } = useSelector(selectToken);
 
-        const formAuth: FormLogin = {
-            email: form.email,
-            password: form.password
-          }
-        const res = await authService.login(formAuth);
-        debugger
+  const authTokenIsValid = () => {
+    if (authToken) {
+      const isMyTokenExpired = isExpired(authToken);
+      if (!isMyTokenExpired) {
+        return true; // token has no expired
+      } else {
+        return false;
+      }
+    } else {
+      return false;
     }
+  };
 
-    const handlerChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const name = e.target.name;
-        const value = e.target.value;
+  const signOut = (cb: () => void) => {
+    dispatch(removeToken());
+    dispatch(setIsLoggedIn(false));
+    setTimeout(cb);
+  };
 
-        setForm({
-            ...form,
-            [name]: value,
-        });
-    };
-    return {
-        handlerSubmit,
-        form,
-        handlerChangeValue
-    }
+  const getUserData = (token?: string) => {
+    token = token || authToken;
+    return decodeToken(token as string) as UserData;
+  };
+
+  return {
+    authTokenIsValid,
+    signOut,
+    getUserData,
+  };
 }
 
-export default useAuth
+export default useAuth;
