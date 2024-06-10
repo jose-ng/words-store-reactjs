@@ -5,11 +5,11 @@ import ContainerCreate from "../ContainerCreate/ContainerCreate";
 import CreateNote from "../CreateNote/CreateNote";
 import CreateWord from "../CreateWord/CreateWord";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import { Header } from "./Header";
-import Logo from "../Logo/Logo";
+import { Header } from "../Header/Header";
+import Logo from "../Header/Logo";
 import { Modal } from "../Modal/Modal";
-import Nav from "../Nav/Nav";
-import NavLinks from "../NavLinks/NavLinks";
+import Nav from "../Header/Nav";
+import NavLinks from "../Header/NavLinks";
 import { WorkOut } from "../WorkOut/WorkOut";
 import { useWorkOut } from "@/hooks/useWorkOut";
 

@@ -10,3 +10,7 @@ export interface FormAuth {
 export interface FormSignup extends Required<Omit<FormAuth, 'username'>> {
   rPassword: string;
 }
+
+export interface FormLogin extends Partial<Omit<FormAuth, 'username'>>  {
+  password?: string;
+}

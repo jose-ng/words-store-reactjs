@@ -1,5 +1,5 @@
 
-import { FormAuth, FormSignup } from '../models/auth.models';
+import { FormLogin, FormSignup } from '../models/auth.models';
 import { axiosInstance } from '../utils/customAxios';
 
 export default class AuthService {
@@ -12,17 +12,17 @@ export default class AuthService {
     return AuthService.instance;
   }
 
-  async login(params: FormAuth) {
+  async login(params: FormLogin) {
     const queryGQL = {
       query: `
-      mutation Login($email: String!, $password: String!) {
+      mutation ($email: String!, $password: String!) {
         login(email: $email, password: $password) {
           token
         }
       }
     `,
       variables: {
-        email: params.username,
+        email: params.email,
         password: params.password,
       },
     };
