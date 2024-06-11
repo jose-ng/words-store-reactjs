@@ -1,5 +1,7 @@
+import Link from "next/link";
+
 function Logo() {
-  return <h1 className="text-2xl mb-1">English Words</h1>;
+  return <Link href="/" className="text-2xl mb-1">English Words</Link>;
 }
 
 export default Logo;

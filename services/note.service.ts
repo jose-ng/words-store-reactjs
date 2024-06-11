@@ -1,5 +1,6 @@
 
 
+import { title } from 'process';
 import { axiosInstance } from '../utils/customAxios';
 
 export default class NoteService {
@@ -37,5 +38,29 @@ export default class NoteService {
     const { errors, notes } = res.data.data;
     if (errors) throw new Error(errors[0].message);
     return notes;
+  }
+
+  async addNote(title: string, text: string) {
+    const queryGQL = {
+      query: `
+      mutation ($dto: AddNoteDto!) {
+        addNote(dto: $dto) {
+          id,
+          title,
+          text
+        }
+      }
+    `,
+      variables: {
+        dto: {
+          title,
+          text,
+        }
+      },
+    };
+    const res = await axiosInstance('apiDomain').post('/graphql', queryGQL);
+    const { errors, addNote: note } = res.data.data;
+    if (errors) throw new Error(errors[0].message);
+    return note;
   }
 }

@@ -59,7 +59,8 @@ export default class WordService {
       },
     };
     const res = await axiosInstance('apiDomain').post('/graphql', queryGQL);
-    const { errors, word } = res.data.data;
+    debugger
+    const { errors, addWord: word } = res.data.data;
     if (errors) throw new Error(errors[0].message);
     return word;
   }

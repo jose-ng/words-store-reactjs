@@ -39,8 +39,9 @@ function useLogin() {
       if (path) {
         window.location.href = path;
       } else
-        window.location.pathname =
-          PAGES_ROUTES.profile.default + '/' + userData.username;
+        // window.location.pathname =
+        //   PAGES_ROUTES.profile.default + '/' + userData.username;
+        window.location.href = '/';
     } catch (error) {
       debugger
     }
