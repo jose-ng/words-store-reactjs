@@ -1,5 +1,5 @@
 "use client";
-import { Layout } from "@/components/Layout/Layout";
+import { Layout } from "@components/Layout/Layout";
 
 
 function Profile() {

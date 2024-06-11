@@ -1,8 +1,7 @@
 "use client"
 import { useEffect, useRef, useState } from "react";
-import URL_API from "../utils/env";
-import WordService from "@/services/word.service";
-import NoteService from "@/services/note.service";
+import { WordService } from "@services/word.service";
+import { NoteService } from "@services/note.service";
 
 function useSearch() {
   const [listWords, setListWords] = useState([]);

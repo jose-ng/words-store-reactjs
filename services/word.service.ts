@@ -1,8 +1,7 @@
 
-import { FormWord } from '@/models/word';
 import { axiosInstance } from '../utils/customAxios';
 
-export default class WordService {
+export class WordService {
   static instance: WordService | null = null;
 
   static create() {

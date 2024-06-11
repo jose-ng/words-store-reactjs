@@ -5,7 +5,6 @@ import eyeOpen from "../../public/eye-open.svg";
 import eyeClose from "../../public/eye-close.svg";
 import Image from "next/image";
 import { useState } from "react";
-import URL_API from "../../utils/env";
 
 function Listwords({ listWords = [], showNotes, setListWords, ip }: any) {
   const [sending, setSending] = useState(false);
@@ -15,21 +14,21 @@ function Listwords({ listWords = [], showNotes, setListWords, ip }: any) {
     try {
       if (sending) return;
       setSending(true);
-      data.ip = ip;
-      const res = await fetch(`${URL_API}/word`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      // data.ip = ip;
+      // const res = await fetch(`${URL_API}/word`, {
+      //   method: "PATCH",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(data),
+      // });
 
-      if (res.ok) {
-        setSending(false);
-      } else {
-        setSending(false);
-        if (res.status === 403) setErrorMsg("Action not allowed");
-      }
+      // if (res.ok) {
+      //   setSending(false);
+      // } else {
+      //   setSending(false);
+      //   if (res.status === 403) setErrorMsg("Action not allowed");
+      // }
     } catch (err) {
       setSending(false);
       setErrorMsg("Server error");
@@ -143,4 +142,4 @@ function Listwords({ listWords = [], showNotes, setListWords, ip }: any) {
   );
 }
 
-export default Listwords;
+export { Listwords };

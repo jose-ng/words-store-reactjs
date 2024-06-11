@@ -26,4 +26,4 @@ function Nav({ children }: Props) {
   </>;
 }
 
-export default Nav;
+export { Nav };

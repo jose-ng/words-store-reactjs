@@ -1,11 +1,11 @@
-import { FormLogin } from '@/models/auth.models';
-import AuthService from '@/services/auth.service';
+import { FormLogin } from '@models/auth.models';
+import { AuthService } from '@services/auth.service';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { setToken } from '../utils/redux/slices/token.slice';
-import { setIsLoggedIn } from '../utils/redux/slices/user.slice';
-import useAuth from './useAuth';
-import { PAGES_ROUTES } from '@/utils/routes';
+import { setToken } from '@utils/redux/slices/token.slice';
+import { setIsLoggedIn } from '@utils/redux/slices/user.slice';
+import { useAuth } from './useAuth';
+// import { PAGES_ROUTES } from '@utils/routes';
 import { useSearchParams } from 'next/navigation'
 
 function useLogin() {
@@ -64,4 +64,4 @@ function useLogin() {
   }
 }
 
-export default useLogin
+export { useLogin };

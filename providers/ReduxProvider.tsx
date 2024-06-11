@@ -1,7 +1,6 @@
 "use client";
-
 import { Provider } from "react-redux";
-import { store } from "../utils/redux/store";
+import { store } from "@utils/redux/store";
 import { persistStore } from "redux-persist";
 
 persistStore(store);

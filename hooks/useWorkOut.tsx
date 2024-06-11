@@ -1,5 +1,4 @@
 "use client"
-import URL_API from "../utils/env";
 import { useEffect, useState } from "react";
 
 function useWorkOut() {
@@ -20,26 +19,26 @@ function useWorkOut() {
         try {
 
             const skipRandom = Math.floor(Math.random() * (skip || 30));
-            let res: any = await fetch(URL_API + '/word?q=&skip=' + skipRandom + '&limit=' + limitResult  + '&order=asc', {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            res = await res.json();
-            const tWords = res.totalWords;
-            setSkip(tWords / 10);
-            const words = res.words.map((word: any) => {
-                return {
-                    _id: word._id,
-                    text_en: word.text_en,
-                    text_es: word.text_es,
-                    rating: word.rating
-                };
-            });
+            // let res: any = await fetch(URL_API + '/word?q=&skip=' + skipRandom + '&limit=' + limitResult  + '&order=asc', {
+            //     method: "GET",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            // });
+            // res = await res.json();
+            // const tWords = res.totalWords;
+            // setSkip(tWords / 10);
+            // const words = res.words.map((word: any) => {
+            //     return {
+            //         _id: word._id,
+            //         text_en: word.text_en,
+            //         text_es: word.text_es,
+            //         rating: word.rating
+            //     };
+            // });
 
-            setListWords(words.reverse());
-            setLoading(false);
+            // setListWords(words.reverse());
+            // setLoading(false);
         } catch (err: any) {
             setError(err);
             setLoading(false);

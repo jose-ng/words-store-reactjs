@@ -2,7 +2,7 @@
 import { FormLogin, FormSignup } from '../models/auth.models';
 import { axiosInstance } from '../utils/customAxios';
 
-export default class AuthService {
+export class AuthService {
   static instance: AuthService | null = null;
 
   static create() {

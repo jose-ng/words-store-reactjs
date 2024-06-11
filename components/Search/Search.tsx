@@ -47,4 +47,4 @@ function Search({ onSearch }: any) {
   );
 }
 
-export default Search;
+export { Search };

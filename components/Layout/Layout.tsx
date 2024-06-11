@@ -1,17 +1,17 @@
 "use client"
 import { useModal } from "@hooks/useModal";
 import { useCreate } from "@hooks/useCreate";
-import ContainerCreate from "../ContainerCreate/ContainerCreate";
-import CreateNote from "../CreateNote/CreateNote";
-import CreateWord from "../CreateWord/CreateWord";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import { Header } from "../Header/Header";
-import Logo from "../Header/Logo";
-import { Modal } from "../Modal/Modal";
-import Nav from "../Header/Nav";
-import NavLinks from "../Header/NavLinks";
-import { WorkOut } from "../WorkOut/WorkOut";
-import { useWorkOut } from "@/hooks/useWorkOut";
+import { ContainerCreate } from "@components/ContainerCreate/ContainerCreate";
+import { CreateNote } from "@components/CreateNote/CreateNote";
+import { CreateWord } from "@components/CreateWord/CreateWord";
+import { ErrorMessage } from "@components/ErrorMessage/ErrorMessage";
+import { Header } from "@components/Header/Header";
+import { Logo } from "@components/Header/Logo";
+import { Modal } from "@components/Modal/Modal";
+import { Nav } from "@components/Header/Nav";
+import { NavLinks } from "@components/Header/NavLinks";
+import { WorkOut } from "@components/WorkOut/WorkOut";
+import { useWorkOut } from "@hooks/useWorkOut";
 
 function Layout({ onSearch, children }: any) {
   const { modalIsOpen, modalCloseHanlder, modalOpenHandler } = useModal();

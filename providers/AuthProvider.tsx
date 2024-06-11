@@ -1,9 +1,9 @@
 "use client";
-import useAuth from '@hooks/useAuth';
+import { useAuth } from '@hooks/useAuth';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeToken, selectToken } from '../utils/redux/slices/token.slice';
-import { selectUserLoggedIn } from '../utils/redux/slices/user.slice';
+import { removeToken, selectToken } from '@utils/redux/slices/token.slice';
+import { selectUserLoggedIn } from '@utils/redux/slices/user.slice';
 
 interface Props {
   children: React.ReactNode;
@@ -27,4 +27,4 @@ function AuthProvider({ children }: Props) {
   return <React.Fragment>{children}</React.Fragment>;
 }
 
-export default AuthProvider;
+export { AuthProvider };

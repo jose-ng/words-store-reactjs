@@ -12,4 +12,4 @@ function ContainerCreate(props: AppProps) {
   );
 }
 
-export default ContainerCreate;
+export { ContainerCreate };

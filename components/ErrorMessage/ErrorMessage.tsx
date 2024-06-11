@@ -7,4 +7,4 @@ function ErrorMessage(props: any) {
   return <p style={buttonStyle}>{props.msg || "Error"}</p>;
 }
 
-export default ErrorMessage;
+export { ErrorMessage };
