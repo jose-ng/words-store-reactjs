@@ -3,7 +3,7 @@ import useLogin from '@/hooks/useLogin'
 import Link from 'next/link'
 import React from 'react'
 
-function page() {
+function Page() {
   const { handlerSubmit, form, handlerChangeValue } = useLogin();
 
   return (
@@ -36,4 +36,4 @@ function page() {
   )
 }
 
-export default page
+export default Page
