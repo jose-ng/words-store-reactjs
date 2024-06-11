@@ -5,6 +5,7 @@ import {
   API_DOMAIN
 } from '../utils/domains';
 let envName = process.env.NEXT_PUBLIC_ENV_NAME!;
+console.log("🚀 ~ envName:", envName)
 
 export default class Env {
   static values: EnvValue = {
@@ -31,7 +32,7 @@ export default class Env {
     },
   };
 
-  static getVar(varName: string) {
+  static getVar(varName: string = "dev") {
     console.log("env: ", envName)
     const envValues = this.values[envName];
     const accesors = varName.split('.');
