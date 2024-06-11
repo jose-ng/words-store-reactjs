@@ -32,7 +32,7 @@ export default class Env {
   };
 
   static getVar(varName: string) {
-    console.log("hola", envName)
+    console.log("env: ", envName)
     const envValues = this.values[envName];
     const accesors = varName.split('.');
     const envItem: EnvItem = envValues;
