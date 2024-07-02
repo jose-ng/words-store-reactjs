@@ -1,5 +1,5 @@
-import useAuth from "@/hooks/useAuth";
-import { selectUserLoggedIn } from "@/utils/redux/slices/user.slice";
+import { useAuth } from "@hooks/useAuth";
+import { selectUserLoggedIn } from "@utils/redux/slices/user.slice";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
@@ -46,4 +46,4 @@ function NavLinks({ onOptionHandler }: any) {
   );
 }
 
-export default NavLinks;
+export { NavLinks };

@@ -1,8 +1,7 @@
 
-import { FormWord } from '@/models/word';
 import { axiosInstance } from '../utils/customAxios';
 
-export default class WordService {
+export class WordService {
   static instance: WordService | null = null;
 
   static create() {
@@ -60,6 +59,29 @@ export default class WordService {
     };
     const res = await axiosInstance('apiDomain').post('/graphql', queryGQL);
     const { errors, addWord: word } = res.data.data;
+    if (errors) throw new Error(errors[0].message);
+    return word;
+  }
+
+  async updateWord(id: string, data: { text_en?: string, text_es?: string, rating?: number }) {
+    const queryGQL = {
+      query: `
+      mutation Mutation($id: ID!, $dto: UpdateWordDto!) {
+        updateWord(id: $id, dto: $dto) {
+          text_es
+          text_en
+          rating
+          id
+        }
+      }
+    `,
+      variables: {
+        id,
+        dto: data        
+      },
+    };
+    const res = await axiosInstance('apiDomain').post('/graphql', queryGQL);
+    const { errors, updated: word } = res.data.data;
     if (errors) throw new Error(errors[0].message);
     return word;
   }

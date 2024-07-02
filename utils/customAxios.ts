@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Env from '../config/env';
+import Env from './env';
 import { store } from './redux/store';
 
 export const axiosInstance = (value = 'apiDomain') => {

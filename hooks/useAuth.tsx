@@ -1,8 +1,8 @@
-import { UserData } from '../models/user.model';
+import { UserData } from '@models/user.model';
 import { isExpired, decodeToken } from 'react-jwt';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeToken, selectToken } from '../utils/redux/slices/token.slice';
-import { setIsLoggedIn } from '../utils/redux/slices/user.slice';
+import { removeToken, selectToken } from '@utils/redux/slices/token.slice';
+import { setIsLoggedIn } from '@utils/redux/slices/user.slice';
 
 function useAuth() {
   const dispatch = useDispatch();
@@ -39,4 +39,4 @@ function useAuth() {
   };
 }
 
-export default useAuth;
+export { useAuth };

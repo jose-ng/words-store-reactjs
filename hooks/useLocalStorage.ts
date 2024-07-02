@@ -16,4 +16,4 @@ function useLocalStorage<T,>(itemName: string, initialValue: T) {
 };
 
 
-export default useLocalStorage
+export { useLocalStorage }

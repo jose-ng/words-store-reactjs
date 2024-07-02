@@ -1,5 +1,5 @@
 "use client"
-import URL_API from "../utils/env";
+import { WordService } from "@/services/word.service";
 import { useEffect, useState } from "react";
 
 function useWorkOut() {
@@ -20,18 +20,14 @@ function useWorkOut() {
         try {
 
             const skipRandom = Math.floor(Math.random() * (skip || 30));
-            let res: any = await fetch(URL_API + '/word?q=&skip=' + skipRandom + '&limit=' + limitResult  + '&order=asc', {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            res = await res.json();
-            const tWords = res.totalWords;
+            const wordService = new WordService();
+            let res = await wordService.getAllWords("", skipRandom, limitResult);
+       
+            const tWords = res.total;
             setSkip(tWords / 10);
-            const words = res.words.map((word: any) => {
+            const words = res.list.map((word: any) => {
                 return {
-                    _id: word._id,
+                    id: word.id,
                     text_en: word.text_en,
                     text_es: word.text_es,
                     rating: word.rating

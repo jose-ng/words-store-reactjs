@@ -2,8 +2,8 @@
 import { Layout } from "@components/Layout/Layout";
 
 
-function Profile() {
+function Dashbard() {
   return <Layout>Profile</Layout>;
 }
 
-export default Profile;
+export default Dashbard;

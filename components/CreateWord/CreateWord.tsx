@@ -26,4 +26,4 @@ function CreateWord({ onSubmit, onChangeValue, form, sending }: any) {
   );
 }
 
-export default CreateWord;
+export { CreateWord };

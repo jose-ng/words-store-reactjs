@@ -45,4 +45,4 @@ function SearchContainer({ onSearch }: any) {
   );
 }
 
-export default SearchContainer;
+export { SearchContainer };

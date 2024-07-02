@@ -1,12 +1,48 @@
-const isClient = typeof window !== "undefined";
+import { EnvValue, EnvItem } from '../models/env.model';
+import {
+  CLIENT_DOMAIN,
+  CLIENT_DOMAIN_LOCAL,
+  API_DOMAIN,
+  API_DOMAIN_LOCAL
+} from './domains';
+let envName = process.env.NEXT_PUBLIC_ENV_NAME!;
 
-const URL_API = isClient
-  ? window.location.host.includes("localhost")
-    ? "http://localhost:3000/api"
-    : "https://words-t.vercel.app/api"
-  : "";
+export default class Env {
+  static values: EnvValue = {
+    dev: {
+      domain: {
+        local: CLIENT_DOMAIN_LOCAL,
+        default: CLIENT_DOMAIN,
+      },
+      apiDomain: API_DOMAIN_LOCAL,
+    },
+    qa: {
+      domain: {
+        local: CLIENT_DOMAIN_LOCAL,
+        default: CLIENT_DOMAIN,
+      },
+      apiDomain: API_DOMAIN,
+    },
+    prod: {
+      domain: {
+        local: CLIENT_DOMAIN_LOCAL,
+        default: CLIENT_DOMAIN,
+      },
+      apiDomain: API_DOMAIN,
+    },
+  };
 
-export default URL_API;
+  static getVar(varName: string) {
+    console.log("env: ", envName)
+    const envValues = this.values[envName];
+    const accesors = varName.split('.');
+    const envItem: EnvItem = envValues;
+    let finalValue = '';
+    for (const accesor of accesors) {
+      finalValue = envItem[accesor] as string;
+    }
+    return finalValue;
+  }
+}
 
-var isEnvDev = process.env.NODE_ENV === "development";
-export { isEnvDev };
+export { envName };

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.scss";
 import dynamic from "next/dynamic";
-import AuthProvider from "@/providers/AuthProvider";
-import Guard from "@/guards/Guard";
-const ReduxProvider = dynamic(() => import("../utils/redux/redux-provider"), {
+import { AuthProvider } from "@providers/AuthProvider";
+import { Guard } from "@guards/Guard";
+const ReduxProvider = dynamic(() => import("@providers/ReduxProvider"), {
   ssr: false
 });
 

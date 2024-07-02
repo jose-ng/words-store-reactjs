@@ -1,5 +1,5 @@
 "use client";
-import useLogin from '@/hooks/useLogin'
+import { useLogin } from '@hooks/useLogin'
 import Link from 'next/link'
 import React from 'react'
 

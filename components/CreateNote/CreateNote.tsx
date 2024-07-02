@@ -26,4 +26,4 @@ function CreateNote({ onSubmit, onChangeValue, form, sending }: any) {
   );
 }
 
-export default CreateNote;
+export { CreateNote };

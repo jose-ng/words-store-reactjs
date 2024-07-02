@@ -1,8 +1,8 @@
 
 "use client"
 import type { NextPage } from "next";
-import Listwords from "../components/Listwords/Listwords";
-import Search from "../components/Search/Search";
+import { Listwords } from "@components/Listwords/Listwords";
+import { Search } from "@components/Search/Search";
 import { Layout } from "@components/Layout/Layout";
 import { useSearch } from "@hooks/useSearch";
 

@@ -1,9 +1,8 @@
 
 
-import { title } from 'process';
-import { axiosInstance } from '../utils/customAxios';
+import { axiosInstance } from '@utils/customAxios';
 
-export default class NoteService {
+export class NoteService {
   static instance: NoteService | null = null;
 
   static create() {
