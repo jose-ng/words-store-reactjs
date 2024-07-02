@@ -20,7 +20,7 @@ function WorkOut({ listWords, loading, setListWords }: any) {
     < div className='min-h-25'>
       <div className='flex justify-between text-emerald-950 pb-3'>
         <div>
-          <span className='text-emerald-950 pr-4'>{listWords[0].rating || 0}</span>
+          <span className='text-emerald-950 pr-4'>{!loading && listWords.length && listWords[0].rating || 0}</span>
           {isLoggedIn ?
             <>
               <button
