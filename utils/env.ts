@@ -2,7 +2,8 @@ import { EnvValue, EnvItem } from '../models/env.model';
 import {
   CLIENT_DOMAIN,
   CLIENT_DOMAIN_LOCAL,
-  API_DOMAIN
+  API_DOMAIN,
+  API_DOMAIN_LOCAL
 } from './domains';
 let envName = process.env.NEXT_PUBLIC_ENV_NAME!;
 
@@ -13,7 +14,7 @@ export default class Env {
         local: CLIENT_DOMAIN_LOCAL,
         default: CLIENT_DOMAIN,
       },
-      apiDomain: API_DOMAIN,
+      apiDomain: API_DOMAIN_LOCAL,
     },
     qa: {
       domain: {

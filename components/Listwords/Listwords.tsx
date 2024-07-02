@@ -5,30 +5,23 @@ import eyeOpen from "../../public/eye-open.svg";
 import eyeClose from "../../public/eye-close.svg";
 import Image from "next/image";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectUserLoggedIn } from "@/utils/redux/slices/user.slice";
+import { useUpdate } from "@/hooks/useUpdate";
 
-function Listwords({ listWords = [], showNotes, setListWords, ip }: any) {
+function Listwords({ listWords = [], showNotes, setListWords }: any) {
+  const { handlerSubmit } = useUpdate();
+  const isLoggedIn = useSelector(selectUserLoggedIn);
   const [sending, setSending] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+
   const handlerUpdateRatingWord = async (data: any) => {
     setErrorMsg("");
     try {
       if (sending) return;
+      
       setSending(true);
-      // data.ip = ip;
-      // const res = await fetch(`${URL_API}/word`, {
-      //   method: "PATCH",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(data),
-      // });
-
-      // if (res.ok) {
-      //   setSending(false);
-      // } else {
-      //   setSending(false);
-      //   if (res.status === 403) setErrorMsg("Action not allowed");
-      // }
+      handlerSubmit( data.id, {rating: data.rating}, "word");
     } catch (err) {
       setSending(false);
       setErrorMsg("Server error");
@@ -58,24 +51,29 @@ function Listwords({ listWords = [], showNotes, setListWords, ip }: any) {
               <li className={classItem} key={item._id + "_" + index}>
                 {!showNotes && (
                   <>
-                    <button
-                      disabled={sending}
-                      type="button"
-                      onClick={() =>
-                        handlerUpdateRatingWord({ id: item._id, rating: 1 })
-                      }
-                    >
-                      &#8593;
-                    </button>
-                    <button
-                      disabled={sending}
-                      type="button"
-                      onClick={() =>
-                        handlerUpdateRatingWord({ id: item._id, rating: -1 })
-                      }
-                    >
-                      &#8595;
-                    </button>
+                    {isLoggedIn ?
+                      <>
+                        <button
+                          disabled={sending}
+                          type="button"
+                          onClick={() =>
+                            handlerUpdateRatingWord({ id: item.id, rating: 1 })
+                          }
+                        >
+                          &#8593;
+                        </button>
+
+                        <button
+                          disabled={sending}
+                          type="button"
+                          onClick={() =>
+                            handlerUpdateRatingWord({ id: item.id, rating: -1 })
+                          }
+                        >
+                          &#8595;
+                        </button>
+                      </>
+                      : null}
                   </>
                 )}
                 {item.hideAllText ? (
