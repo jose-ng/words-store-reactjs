@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useModal } from "@hooks/useModal";
 import { useCreate } from "@hooks/useCreate";
 import { ContainerCreate } from "@components/ContainerCreate/ContainerCreate";
@@ -6,16 +6,20 @@ import { CreateNote } from "@components/CreateNote/CreateNote";
 import { CreateWord } from "@components/CreateWord/CreateWord";
 import { ErrorMessage } from "@components/ErrorMessage/ErrorMessage";
 import { Header } from "@components/Header/Header";
-import { Logo } from "@components/Header/Logo";
 import { Modal } from "@components/Modal/Modal";
-import { Nav } from "@components/Header/Nav";
 import { NavLinks } from "@components/Header/NavLinks";
 import { WorkOut } from "@components/WorkOut/WorkOut";
 import { useWorkOut } from "@hooks/useWorkOut";
 
 function Layout({ onSearch, children }: any) {
   const { modalIsOpen, modalCloseHanlder, modalOpenHandler } = useModal();
-  const { openModalWorkOut, setOpenModalWorkOut, setListWords, listWords, loading } = useWorkOut();
+  const {
+    openModalWorkOut,
+    setOpenModalWorkOut,
+    setListWords,
+    listWords,
+    loading,
+  } = useWorkOut();
   const {
     handlerSubmit,
     handlerChangeValue,
@@ -35,15 +39,9 @@ function Layout({ onSearch, children }: any) {
   return (
     <>
       <Header>
-        <Logo />
-        <Nav>
-          <NavLinks onOptionHandler={chooseCreateOptionHandler} />
-        </Nav>
+        <NavLinks onOptionHandler={chooseCreateOptionHandler} />
       </Header>
-      <main className="w-full p-4">
-        {children}
-      </main>
-
+      <main className="w-full p-4">{children}</main>
       <Modal
         isOpen={modalIsOpen}
         onClose={() => {
@@ -51,54 +49,59 @@ function Layout({ onSearch, children }: any) {
           modalCloseHanlder();
           setOpenModalWorkOut(false);
         }}
-      >{openModalWorkOut ?
-        <WorkOut
-          listWords={listWords}
-          setListWords={setListWords}
-          loading={loading}
-        /> :
-        <ContainerCreate
-          error={errorCreate}
-          onError={() => <ErrorMessage msg={errorCreate} />}
-        >
-          {createOption === "word" && (
-            <CreateWord
-              onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.preventDefault();
-                handlerSubmit("word");
-                resetValues();
-                modalCloseHanlder();
-                onSearch("", true);
-              }}
-              onChangeValue={handlerChangeValue}
-              form={form}
-              sending={sending}
-            />
-          )}
-          {createOption === "note" && (
-            <CreateNote
-              onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.preventDefault();
-                handlerSubmit("note");
-                resetValues();
-                modalCloseHanlder();
-                onSearch("", true);
-              }}
-              onChangeValue={handlerChangeValue}
-              form={form}
-              sending={sending}
-            />
-          )}
-        </ContainerCreate>
-        }
+      >
+        {openModalWorkOut ? (
+          <WorkOut
+            listWords={listWords}
+            setListWords={setListWords}
+            loading={loading}
+          />
+        ) : (
+          <ContainerCreate
+            error={errorCreate}
+            onError={() => <ErrorMessage msg={errorCreate} />}
+          >
+            {createOption === "word" && (
+              <CreateWord
+                onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.preventDefault();
+                  handlerSubmit("word");
+                  resetValues();
+                  modalCloseHanlder();
+                  onSearch("", true);
+                }}
+                onChangeValue={handlerChangeValue}
+                form={form}
+                sending={sending}
+              />
+            )}
+            {createOption === "note" && (
+              <CreateNote
+                onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.preventDefault();
+                  handlerSubmit("note");
+                  resetValues();
+                  modalCloseHanlder();
+                  onSearch("", true);
+                }}
+                onChangeValue={handlerChangeValue}
+                form={form}
+                sending={sending}
+              />
+            )}
+          </ContainerCreate>
+        )}
       </Modal>
-      <button type="button" className="fixed right-14 p-3 bottom-5 w-15 h-15 bg-yellow-500 hover:bg-yellow-600 rounded-full" onClick={() => {
-        setOpenModalWorkOut(true);
-        modalOpenHandler();
-      }}>
+      <button
+        type="button"
+        className="fixed right-14 p-3 bottom-5 w-15 h-15 bg-yellow-500 hover:bg-yellow-600 rounded-full"
+        onClick={() => {
+          setOpenModalWorkOut(true);
+          modalOpenHandler();
+        }}
+      >
         Workout
       </button>
-
     </>
   );
 }
