@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.scss";
+import "./../public/static/css/globals.scss";
 import dynamic from "next/dynamic";
 import { AuthProvider } from "@providers/AuthProvider";
 import { Guard } from "@guards/Guard";

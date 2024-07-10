@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "material-icons/iconfont/material-icons.css";
+@import "variables.scss";
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -24,6 +27,18 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+main {
+  width: 100%;
+  min-height: calc(100vh - 170px);
+  padding: 1rem;
+
+  // Media Queries (Mobile first approach)
+  @media (min-width: ($x-large+1)) {
+    max-width: $x-large;
+    margin: 0 auto;
+  }
 }
 
 @layer utilities {
