@@ -22,6 +22,7 @@ function Listwords({ listWords = [], showNotes, setListWords }: any) {
       
       setSending(true);
       handlerSubmit( data.id, {rating: data.rating}, "word");
+      setSending(false);
     } catch (err) {
       setSending(false);
       setErrorMsg("Server error");
