@@ -1,24 +1,24 @@
 "use client";
-import { useAuth } from '@hooks/useAuth';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { removeToken, selectToken } from '@utils/redux/slices/token.slice';
-import { selectUserLoggedIn } from '@utils/redux/slices/user.slice';
+import { useAuth } from "@hooks/useAuth";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectToken } from "@utils/redux/slices/token.slice";
 
 interface Props {
   children: React.ReactNode;
 }
 function AuthProvider({ children }: Props) {
-  const { authTokenIsValid } = useAuth();
-  const dispatch = useDispatch();
+  const { authTokenIsValid, signOut } = useAuth();
   const token = useSelector(selectToken);
 
   const checkValidity = () => {
     if (!authTokenIsValid()) {
-      dispatch(removeToken());
-      dispatch(selectUserLoggedIn(false));
+      signOut(() => {
+        window.location.href = "/";
+      });
     }
   };
+
   useEffect(() => {
     if (token.exp) checkValidity();
     // eslint-disable-next-line react-hooks/exhaustive-deps
