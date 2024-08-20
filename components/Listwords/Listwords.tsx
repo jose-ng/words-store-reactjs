@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import styles from "./List.module.scss";
 import classNames from "classnames";
 import eyeOpen from "../../public/eye-open.svg";
@@ -8,26 +8,27 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUserLoggedIn } from "@/utils/redux/slices/user.slice";
 import { useUpdate } from "@/hooks/useUpdate";
+import { Card } from "../Card/Card";
 
-function Listwords({ listWords = [], showNotes, setListWords }: any) {
+function Listwords({ listWords = [], setListWords }: any) {
   const { handlerSubmit } = useUpdate();
   const isLoggedIn = useSelector(selectUserLoggedIn);
   const [sending, setSending] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handlerUpdateRatingWord = async (data: any) => {
-    setErrorMsg("");
-    try {
-      if (sending) return;
-      
-      setSending(true);
-      handlerSubmit( data.id, {rating: data.rating}, "word");
-      setSending(false);
-    } catch (err) {
-      setSending(false);
-      setErrorMsg("Server error");
-    }
-  };
+  // const handlerUpdateRatingWord = async (data: any) => {
+  //   setErrorMsg("");
+  //   try {
+  //     if (sending) return;
+
+  //     setSending(true);
+  //     handlerSubmit( data.id, {rating: data.rating}, "word");
+  //     setSending(false);
+  //   } catch (err) {
+  //     setSending(false);
+  //     setErrorMsg("Server error");
+  //   }
+  // };
 
   const handlerList = (item: any, newValueForHideAllText: boolean) => {
     const listWordsNew = listWords.map((x: any) => {
@@ -50,7 +51,8 @@ function Listwords({ listWords = [], showNotes, setListWords }: any) {
               : styles["Item"];
             return (
               <li className={classItem} key={item._id + "_" + index}>
-                {!showNotes && (
+                <Card item={item} isLoggedIn={isLoggedIn}></Card>
+                {/* {!showNotes && (
                   <>
                     {isLoggedIn ?
                       <>
@@ -132,7 +134,7 @@ function Listwords({ listWords = [], showNotes, setListWords }: any) {
                       )}
                     </pre>
                   </div>
-                )}
+                )} */}
               </li>
             );
           })}

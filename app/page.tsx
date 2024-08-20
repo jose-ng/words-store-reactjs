@@ -1,5 +1,4 @@
-
-"use client"
+"use client";
 import type { NextPage } from "next";
 import { Listwords } from "@components/Listwords/Listwords";
 import { Search } from "@components/Search/Search";
@@ -30,14 +29,14 @@ const Home: NextPage = () => {
   return (
     <Layout onSearch={handlerSearch}>
       <section>
-        <div>
+        {/* <div>
           Show notes{" "}
           <input
             type="checkbox"
             checked={!!showNotes}
             onChange={handlerInput}
           />
-        </div>
+        </div> */}
         <Search
           showNotes={showNotes}
           onSearch={handlerSearch}
@@ -76,8 +75,9 @@ const Home: NextPage = () => {
         <>
           <br />
           <button
-            disabled={listWords.length >= totalRecords || loading}
             type="button"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            disabled={listWords.length >= totalRecords || loading}
             onClick={() => {
               const skip = nextResults + 1;
               setNextResults(skip);
@@ -88,7 +88,7 @@ const Home: NextPage = () => {
           <br />
         </>
       )}
-    </Layout >
+    </Layout>
   );
 };
 
