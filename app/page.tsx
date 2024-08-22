@@ -1,93 +1,46 @@
 "use client";
 import type { NextPage } from "next";
-import { Listwords } from "@components/Listwords/Listwords";
-import { Search } from "@components/Search/Search";
 import { Layout } from "@components/Layout/Layout";
-import { useSearch } from "@hooks/useSearch";
 
 const Home: NextPage = () => {
-  const {
-    listWords,
-    setListWords,
-    showNotes,
-    setShowNotes,
-    nextResults,
-    setNextResults,
-    totalRecords,
-    totalShowRecords,
-    query,
-    loading,
-    handlerSearch,
-  } = useSearch();
-
-  const handlerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.checked;
-
-    setShowNotes(value);
-  };
-
   return (
-    <Layout onSearch={handlerSearch}>
-      <section>
-        {/* <div>
-          Show notes{" "}
-          <input
-            type="checkbox"
-            checked={!!showNotes}
-            onChange={handlerInput}
-          />
-        </div> */}
-        <Search
-          showNotes={showNotes}
-          onSearch={handlerSearch}
-          nextResults={nextResults}
-        />
-        {!showNotes && (
-          <span>
-            {" Total show words: " +
-              (totalShowRecords > totalRecords
-                ? totalRecords
-                : totalShowRecords)}
-          </span>
-        )}
-        {!showNotes && (
-          <span>
-            {", Total words"}
-            {query ? (
-              <>
-                {" with"}
-                <i>
-                  {" '"}
-                  {query} {"'"}
-                </i>
-              </>
-            ) : null}
-            {": " + totalRecords}
-          </span>
-        )}
-      </section>
-      <Listwords
-        listWords={listWords}
-        showNotes={showNotes}
-        setListWords={setListWords}
-      />
-      {listWords.length > 0 && !showNotes && (
-        <>
-          <br />
-          <button
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            disabled={listWords.length >= totalRecords || loading}
-            onClick={() => {
-              const skip = nextResults + 1;
-              setNextResults(skip);
-            }}
-          >
-            Load More
-          </button>
-          <br />
-        </>
-      )}
+    <Layout>
+      <div className="mx-auto max-w-2xl py-32 sm:py-10 lg:py-32 dark">
+        <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+          <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-white ring-1 ring-white/10 hover:ring-white/20">
+            Comprehensive word definitions and grammar rules for English
+            learners.{" "}
+            <a href="#" className="font-semibold text-indigo-400">
+              <span className="absolute inset-0" aria-hidden="true"></span>
+              Read more <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+        <div className="text-center text-white">
+          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
+            Unlock the power of language knowledge
+          </h1>
+          <p className="mt-6 text-lg leading-8">
+            Explore a vast collection of word meanings and grammar rules to
+            enhance your language skills. Our comprehensive dictionary provides
+            detailed explanations and examples to help you master English.
+          </p>
+          <div className="mt-10 flex items-center justify-center gap-x-6">
+            <a
+              href="#"
+              className="rounded-md bg-indigo-400 px-3.5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400"
+            >
+              Get started
+            </a>
+            <a
+              href="#"
+              className="text-sm font-semibold leading-6 text-gray-300"
+            >
+              Learn more <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </Layout>
   );
 };
