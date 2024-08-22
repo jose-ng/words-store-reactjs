@@ -14,7 +14,7 @@ export default class Env {
         local: CLIENT_DOMAIN_LOCAL,
         default: CLIENT_DOMAIN,
       },
-      apiDomain: API_DOMAIN,
+      apiDomain: API_DOMAIN_LOCAL,
     },
     qa: {
       domain: {

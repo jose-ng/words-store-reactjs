@@ -1,5 +1,4 @@
 
-
 import { axiosInstance } from '@utils/customAxios';
 
 export class NoteService {
@@ -12,6 +11,34 @@ export class NoteService {
     return NoteService.instance;
   }
 
+  async getNoteById(noteId: string) {
+    const queryGQL = {
+      query: `
+      query Note($noteId: ID!) {
+        note(id: $noteId) {
+          id
+          title
+          text
+          slugName
+          urlImg
+          createAt
+          deleteAt
+          public
+          level
+          order
+        }
+      }
+    `,
+      variables: {
+        noteId
+      },
+    };
+    const res = await axiosInstance('apiDomain').post('/graphql', queryGQL);    
+    const { errors, data } = res.data;
+    if (errors) throw new Error(errors[0].message);
+    return data.note;
+  }
+
   async getAllNotes(query: string, skip: number = 0, limit: number = 10) {
     const queryGQL = {
       query: `
@@ -21,7 +48,9 @@ export class NoteService {
             id,
             title,
             text,
-            urlImg
+            urlImg,
+            level,
+            order
           },
           total
         }

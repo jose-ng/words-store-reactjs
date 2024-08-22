@@ -11,6 +11,32 @@ export class WordService {
     return WordService.instance;
   }
 
+  async getWordById(wordId: string) {
+    const queryGQL = {
+      query: `
+      query Word($wordId: ID!) {
+        word(id: $wordId) {
+          id
+          text_es
+          text_en
+          slugName
+          rating
+          createAt
+          deleteAt
+          public
+        }
+      }
+    `,
+      variables: {
+        wordId
+      },
+    };
+    const res = await axiosInstance('apiDomain').post('/graphql', queryGQL);    
+    const { errors, data } = res.data;
+    if (errors) throw new Error(errors[0].message);
+    return data.word;
+  }
+
   async getAllWords(query: string, skip: number = 0, limit: number = 10) {
     const queryGQL = {
       query: `
@@ -34,7 +60,6 @@ export class WordService {
     };
     const res = await axiosInstance('apiDomain').post('/graphql', queryGQL);
     const { errors, words } = res.data.data;
-    if (errors) throw new Error(errors[0].message);
     return words;
   }
 

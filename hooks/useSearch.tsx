@@ -52,6 +52,7 @@ function useSearch() {
       setLoading(true);
       let res: any = {};
       q = q || query;
+      
       if (showNotes) {
         const noteService = new NoteService();
         res = await noteService.getAllNotes(q || "", nextResults, limitResult);
