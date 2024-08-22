@@ -17,6 +17,8 @@ const Dashbard: NextPage = () => {
     loading,
     handlerSearch,
   } = useAcademicInfo();
+  // const notInitialRender = useRef(false); // Used for avoid the initial useEffect for 'query' search
+  // const listReordered = { "Sin nivel": [] }; 
 
   return (
     <Layout onSearch={handlerSearch}>
@@ -29,12 +31,12 @@ const Dashbard: NextPage = () => {
         <div>
           {Object.keys(list).map((level) => (
             <div key={level}>
-              <h3>{level}</h3>
+              <h3>Level: {level}</h3>
               <ul className="pl-2">
                 {list[level].map((item: any, index: any) => (
                   <li key={index}>
                     <Link
-                      href={`/dashboard/${item.id}`}
+                      href={`/academy/${item.id}`}
                       scroll={true}
                       className="pl-2 flex flex-wrap flex-col flex-1"
                     >

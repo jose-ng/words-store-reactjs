@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { NoteService } from "@services/note.service";
-import { AcademicInfo, AcademicInfoDto } from "@/models/AcademicInfo.model";
+import { AcademicInfo } from "@models/academicInfo.model";
 
 function useAcademicInfo() {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState({});
   const [nextResults, setNextResults] = useState(0);
   const [totalRecords, setTotalRecords] = useState(0);
   const [totalShowRecords, setTotalShowRecords] = useState(0);
@@ -50,21 +50,26 @@ function useAcademicInfo() {
       setLoading(true);
       let res: any = {};
       q = q || query;
-      
+
       const noteService = NoteService.create();
       res = await noteService.getAllNotes(q || "", nextResults, limitResult);
-      res.list = res.list.reduce((acc: any, obj: { level: string; }) => {
-        // Si el nivel no existe en el acumulador, inicialízalo como un array vacío
-        obj.level = obj.level || "Sin nivel";
-        if (!acc[obj.level]) {
-          acc[obj.level] = [];
-        }
-        // Añadir el objeto actual al array correspondiente al nivel
-        acc[obj.level].push(obj);
-        return acc;
-      }, {});
-    
-      setList(res.list);
+
+      const groupedItems = res.list.reduce(
+        (acc: { [key: string]: AcademicInfo[] }, item: AcademicInfo) => {
+          item.level = item.level || "Other";
+          if (!acc[item.level]) {
+            acc[item.level] = [];
+          }
+          acc[item.level].push(item);
+          return acc;
+        },
+        {}
+      );
+      const noLevelObj = groupedItems["Other"];
+      delete groupedItems["Other"];
+      const sortedGroupedItems = { ...groupedItems, Other: noLevelObj };
+
+      setList(sortedGroupedItems);
       setLoading(false);
     } catch (err: any) {
       setError(err);

@@ -1,7 +1,7 @@
 "use client";
 import { Search } from "@/components/Search/Search";
 import { useAcademicInfo } from "@/hooks/useAcademcInfo";
-import { AcademicInfo } from "@/models/AcademicInfo.model";
+import { AcademicInfo } from "@/models/academicInfo.model";
 import { NoteService } from "@/services/note.service";
 import { Layout } from "@components/Layout/Layout";
 import { NextPage } from "next";
@@ -29,6 +29,7 @@ const Dashbard: NextPage = () => {
 
   return (
     <Layout>
+      <h1>{info?.title}</h1>
       {info?.text}
       <br />
       {info?.urlImg && (
