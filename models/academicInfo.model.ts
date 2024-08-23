@@ -11,6 +11,10 @@ export interface AcademicInfo {
 }
 
 export interface AcademicInfoDto {
-    list: AcademicInfo[];
-    total: number;
-  }
+  list: AcademicInfo[];
+  total: number;
+}
+
+export interface AcademicInfoObj {
+  [level: string]: AcademicInfo[];
+}

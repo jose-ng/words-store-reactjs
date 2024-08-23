@@ -7,19 +7,11 @@ import Link from "next/link";
 
 const Dashbard: NextPage = () => {
   const {
-    list,
-    setList,
+    academicObj,
     nextResults,
-    setNextResults,
-    totalRecords,
-    totalShowRecords,
-    query,
-    loading,
     handlerSearch,
   } = useAcademicInfo();
-  // const notInitialRender = useRef(false); // Used for avoid the initial useEffect for 'query' search
-  // const listReordered = { "Sin nivel": [] }; 
-
+  
   return (
     <Layout onSearch={handlerSearch}>
       <Search
@@ -29,11 +21,11 @@ const Dashbard: NextPage = () => {
       />
       <section>
         <div>
-          {Object.keys(list).map((level) => (
+          {academicObj && Object.keys(academicObj).map((level) => (
             <div key={level}>
               <h3>Level: {level}</h3>
               <ul className="pl-2">
-                {list[level].map((item: any, index: any) => (
+                {academicObj[level].map((item: any, index: any) => (
                   <li key={index}>
                     <Link
                       href={`/academy/${item.id}`}

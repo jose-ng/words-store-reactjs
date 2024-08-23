@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { NoteService } from "@services/note.service";
-import { AcademicInfo } from "@models/academicInfo.model";
+import { AcademicInfo, AcademicInfoObj } from "@models/academicInfo.model";
 
 function useAcademicInfo() {
-  const [list, setList] = useState({});
+  const [academicObj, setAcademicObj] = useState<AcademicInfoObj>();
   const [nextResults, setNextResults] = useState(0);
   const [totalRecords, setTotalRecords] = useState(0);
   const [totalShowRecords, setTotalShowRecords] = useState(0);
@@ -69,7 +69,7 @@ function useAcademicInfo() {
       delete groupedItems["Other"];
       const sortedGroupedItems = { ...groupedItems, Other: noLevelObj };
 
-      setList(sortedGroupedItems);
+      setAcademicObj(sortedGroupedItems);
       setLoading(false);
     } catch (err: any) {
       setError(err);
@@ -78,8 +78,8 @@ function useAcademicInfo() {
   };
 
   return {
-    list,
-    setList,
+    academicObj,
+    setAcademicObj,
     nextResults,
     setNextResults,
     totalRecords,
