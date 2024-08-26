@@ -1,6 +1,7 @@
 "use client";
 import type { NextPage } from "next";
 import { Layout } from "@components/Layout/Layout";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
@@ -10,10 +11,9 @@ const Home: NextPage = () => {
           <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-white ring-1 ring-white/10 hover:ring-white/20">
             Comprehensive word definitions and grammar rules for English
             learners.{" "}
-            <a href="#" className="font-semibold text-indigo-400">
-              <span className="absolute inset-0" aria-hidden="true"></span>
+            <Link href="/academy" className="font-semibold text-indigo-400">
               Read more <span aria-hidden="true">&rarr;</span>
-            </a>
+            </Link>
           </div>
         </div>
         <div className="text-center text-white">
@@ -26,18 +26,18 @@ const Home: NextPage = () => {
             detailed explanations and examples to help you master English.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <a
-              href="#"
+            <Link
+              href="/words"
               className="rounded-md bg-indigo-400 px-3.5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400"
             >
               Get started
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/words"
               className="text-sm font-semibold leading-6 text-gray-300"
             >
               Learn more <span aria-hidden="true">→</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import { Layout } from "@components/Layout/Layout";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-// TODO: Implement this word detail component
+// TODO: Implement detail component
 function Dashbard() {
   const pathname = usePathname();
   const [info, setInfo] = useState<WordInfo>();
