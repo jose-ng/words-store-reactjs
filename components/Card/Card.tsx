@@ -7,7 +7,7 @@ function Card({ item, isLoggedIn, list }: any) {
     <div className="flex px-3 py-1 text-base text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white mb-1 items-center flex-wrap">
       {isLoggedIn && <span className="material-icons">drag_handle</span>}
       <Link
-        href={`/word/${item.id}`}
+        href={`/words/${item.id}`}
         scroll={true}
         className="pl-2 flex flex-wrap flex-col flex-1"
       >
