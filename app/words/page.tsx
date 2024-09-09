@@ -5,6 +5,8 @@ import { Search } from "@components/Search/Search";
 import { Layout } from "@components/Layout/Layout";
 import { useSearch } from "@hooks/useSearch";
 import { WorkoutDialog } from "@/components/WorkoutDialog/WorkoutDialog";
+import { FloatButtonContainer } from "@/components/FloatButtonContainer/FloatButtonContainer";
+import { AddWordDialog } from "@/components/AddWordDialog/AddWordDialog";
 
 const Words: NextPage = () => {
   const {
@@ -66,7 +68,10 @@ const Words: NextPage = () => {
           <br />
         </>
       )}
-      <WorkoutDialog />
+      <FloatButtonContainer>
+          <AddWordDialog />
+          <WorkoutDialog />
+      </FloatButtonContainer>
     </Layout>
   );
 };
