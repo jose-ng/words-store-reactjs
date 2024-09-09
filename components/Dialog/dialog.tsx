@@ -50,3 +50,5 @@ export const Dialog = forwardRef(({ children, title, onClose }: DialogProps, ref
         </dialog>
     );
 });
+
+Dialog.displayName = 'Dialog';
