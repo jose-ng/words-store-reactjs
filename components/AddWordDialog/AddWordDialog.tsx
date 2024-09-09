@@ -4,8 +4,11 @@ import { ErrorMessage } from '@/components/ErrorMessage/ErrorMessage';
 import { CreateWord } from '@/components/CreateWord/CreateWord';
 import { useRef } from 'react';
 import { useCreate } from '@/hooks/useCreate';
+import { useSelector } from 'react-redux';
+import { selectUserLoggedIn } from '@/utils/redux/slices/user.slice';
 
 export const AddWordDialog = () => {
+    const isUserLoggedIn = useSelector(selectUserLoggedIn);
     const dialogRef = useRef<DialogRefType>(null);
     const {
         handlerSubmit,
@@ -21,6 +24,10 @@ export const AddWordDialog = () => {
     };
 
     const closeDialog = () => dialogRef.current?.close();
+
+    if (!isUserLoggedIn) {
+        return null;
+    }
 
     return (
         <>
