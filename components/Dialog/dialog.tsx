@@ -8,6 +8,7 @@ type DialogProps = {
 
 export type DialogRefType = {
     open: () => void;
+    close: () => void;
 };
 
 export const Dialog = forwardRef(({ children, title, onClose }: DialogProps, ref) => {
@@ -17,6 +18,9 @@ export const Dialog = forwardRef(({ children, title, onClose }: DialogProps, ref
         return {
             open() {
                 dialogRef.current?.showModal();
+            },
+            close() {
+                dialogRef.current?.close();
             },
         };
     });
