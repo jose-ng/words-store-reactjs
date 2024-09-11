@@ -44,7 +44,7 @@ const Dashbard: NextPage = () => {
           ))}
         </div>
         <FloatButtonContainer>
-          <AddNoteDialog onSearch={handlerSearch} />
+          <AddNoteDialog />
         </FloatButtonContainer>
       </section>
     </Layout>
