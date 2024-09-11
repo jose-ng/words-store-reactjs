@@ -29,6 +29,7 @@ const config: Config = {
         '^@/styles/(.*)$': '<rootDir>/styles/$1',
         '^@/guards/(.*)$': '<rootDir>/guards/$1',
     },
+    testPathIgnorePatterns: ["e2e"],
     setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
     testEnvironment: 'jsdom',
 };
