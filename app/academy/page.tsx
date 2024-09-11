@@ -1,4 +1,6 @@
 "use client";
+import { AddNoteDialog } from "@/components/AddNoteDialog/AddNoteDialog";
+import { FloatButtonContainer } from "@/components/FloatButtonContainer/FloatButtonContainer";
 import { Search } from "@/components/Search/Search";
 import { useAcademicInfo } from "@/hooks/useAcademcInfo";
 import { Layout } from "@components/Layout/Layout";
@@ -41,6 +43,9 @@ const Dashbard: NextPage = () => {
             </div>
           ))}
         </div>
+        <FloatButtonContainer>
+          <AddNoteDialog />
+        </FloatButtonContainer>
       </section>
     </Layout>
   );

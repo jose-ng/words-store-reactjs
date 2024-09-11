@@ -4,6 +4,9 @@ import { Listwords } from "@components/Listwords/Listwords";
 import { Search } from "@components/Search/Search";
 import { Layout } from "@components/Layout/Layout";
 import { useSearch } from "@hooks/useSearch";
+import { WorkoutDialog } from "@/components/WorkoutDialog/WorkoutDialog";
+import { FloatButtonContainer } from "@/components/FloatButtonContainer/FloatButtonContainer";
+import { AddWordDialog } from "@/components/AddWordDialog/AddWordDialog";
 
 const Words: NextPage = () => {
   const {
@@ -65,6 +68,10 @@ const Words: NextPage = () => {
           <br />
         </>
       )}
+      <FloatButtonContainer>
+          <AddWordDialog />
+          <WorkoutDialog />
+      </FloatButtonContainer>
     </Layout>
   );
 };
