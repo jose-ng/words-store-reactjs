@@ -10,17 +10,16 @@ import Link from "next/link";
 const Dashbard: NextPage = () => {
   const {
     academicObj,
-    nextResults,
+    inputRef,
     handlerSearch,
   } = useAcademicInfo();
   
   return (
     <Layout onSearch={handlerSearch}>
       <Search
-        showNotes={true}
-        onSearch={handlerSearch}
-        nextResults={nextResults}
-      />
+          ref={inputRef}
+          onSearch={handlerSearch}
+        />
       <section>
         <div>
           {academicObj && Object.keys(academicObj).map((level) => (
