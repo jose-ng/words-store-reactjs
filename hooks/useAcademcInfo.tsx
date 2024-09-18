@@ -13,6 +13,7 @@ function useAcademicInfo() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const notInitialRender = useRef(false); // Used for avoid the initial useEffect for 'query' search
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const performSearch = () => {
     setTotalRecords(0);
@@ -87,6 +88,7 @@ function useAcademicInfo() {
     query,
     loading,
     handlerSearch,
+    inputRef
   };
 }
 export { useAcademicInfo };

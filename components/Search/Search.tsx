@@ -1,8 +1,32 @@
-"use client";
-import React, { useState } from "react";
-// import styles from "./Search.module.scss";
+import React, {
+  forwardRef,
+  useState,
+  useRef,
+  useImperativeHandle,
+  useEffect,
+} from "react";
 
-function Search({ onSearch }: any) {
+type SearchProps = {
+  onSearch: (query: string) => void;
+};
+
+export type InputRefType = {
+  focus: () => void;
+};
+
+export const Search = forwardRef(({ onSearch }: SearchProps, ref) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  useImperativeHandle(ref, () => ({
+    focus() {
+      inputRef.current?.focus();
+    },
+  }));
+
   const [searchForm, setSearchForm] = useState({ search: "" });
 
   const handlerSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,9 +41,15 @@ function Search({ onSearch }: any) {
     onSearch(value);
   };
 
+  const handlerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSearch(searchForm.search);
+  };
+
   return (
-    <section className="w-full relative inline-block">
+    <form onSubmit={handlerSubmit} className="w-full relative inline-block">
       <input
+        ref={inputRef}
         className="pr-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         autoComplete="Off"
         name="search"
@@ -36,14 +66,14 @@ function Search({ onSearch }: any) {
               ...searchForm,
               search: "",
             });
-            onSearch("", true);
+            onSearch("");
           }}
         >
           <span className="material-icons">close</span>
         </button>
       )}
-    </section>
+    </form>
   );
-}
+});
 
-export { Search };
+Search.displayName = "Search";
