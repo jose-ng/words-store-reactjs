@@ -26,7 +26,6 @@ function useAcademicInfo() {
   };
 
   useEffect(() => {
-    if (inputRef.current) inputRef.current.focus();
     performSearch();
   }, []);
 
@@ -89,7 +88,7 @@ function useAcademicInfo() {
     query,
     loading,
     handlerSearch,
-    inputRef,
+    inputRef
   };
 }
 export { useAcademicInfo };

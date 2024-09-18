@@ -49,6 +49,9 @@ const Words: NextPage = () => {
       </section>
       <Listwords
         listWords={listWords}
+        nextResults={nextResults}
+        handlerSetNextResult={handlerSetNextResult}
+        totalRecords={totalRecords}
         error={error}
         loading={loading}
         onError={() => <ErrorMessage />}
@@ -64,23 +67,6 @@ const Words: NextPage = () => {
           </li>
         )}
       />
-      {listWords.length > 0 && (
-        <>
-          <br />
-          <button
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            disabled={listWords.length >= totalRecords || loading}
-            onClick={() => {
-              const skip = nextResults + 1;
-              handlerSetNextResult(skip);
-            }}
-          >
-            Load More
-          </button>
-          <br />
-        </>
-      )}
       <FloatButtonContainer>
           <AddWordDialog />
           <WorkoutDialog />

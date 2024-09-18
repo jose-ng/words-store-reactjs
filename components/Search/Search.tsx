@@ -3,6 +3,7 @@ import React, {
   useState,
   useRef,
   useImperativeHandle,
+  useEffect,
 } from "react";
 
 type SearchProps = {
@@ -15,6 +16,10 @@ export type InputRefType = {
 
 export const Search = forwardRef(({ onSearch }: SearchProps, ref) => {
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   useImperativeHandle(ref, () => ({
     focus() {
@@ -39,7 +44,7 @@ export const Search = forwardRef(({ onSearch }: SearchProps, ref) => {
   const handlerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSearch(searchForm.search);
-  }
+  };
 
   return (
     <form onSubmit={handlerSubmit} className="w-full relative inline-block">
