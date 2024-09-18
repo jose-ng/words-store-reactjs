@@ -25,7 +25,6 @@ function useSearchWords() {
   };
 
   useEffect(() => {
-    if (inputRef.current) inputRef.current.focus();
     performSearch();
   }, []);
 
